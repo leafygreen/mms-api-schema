@@ -1,0 +1,9 @@
+{
+ "description": "MMS Public API Description",
+ "id": "http://api.mms.com/schema#",
+ "links": [{
+   "href": "https://mms.mongodb.com/api/public/v1.0",
+   "rel": "self"
+ }],
+ "title": "MMS Public API"
+}
