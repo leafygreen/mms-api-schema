@@ -18,7 +18,7 @@
       ]
     },
     "lastActiveAgent": {
-      "description": "Date that a ping was last received from one of the group’s monitoring agents.",
+      "description": "Date that a ping was last received from one of the group's monitoring agents.",
       "example": "2012-01-01T12:00:00Z",
       "format": "date-time",
       "type": [
