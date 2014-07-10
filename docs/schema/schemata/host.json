@@ -1,0 +1,364 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "title": "Host",
+  "definitions": {
+    "id": {
+      "description": "Unique identifier",
+      "example": "5196d3628d022db4cbc26d9e",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "groupId": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "hostname": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "port": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "integer"
+      ]
+    },
+    "typeName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "lastPing": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "ipAddress": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "version": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "deactivated": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "hasStartupWarnings": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "sslEnabled": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "logsEnabled": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "lastReactivated": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "uptimeMsec": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "number"
+      ]
+    },
+    "lastRestart": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "shardName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "replicaSetName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "replicaStateName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "created": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "hostEnabled": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "journalingEnabled": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "alertsEnabled": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "muninEnabled": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "hidden": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "profilerEnabled": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "lowUlimit": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "boolean"
+      ]
+    },
+    "muninPort": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "integer"
+      ]
+    },
+    "authMechanismName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "username": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "password": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "description": "Working with MMS Hosts",
+  "links": [
+    {
+      "description": "Create a new host.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/hosts",
+      "method": "POST",
+      "rel": "create",
+      "schema": {
+        "properties": {
+        },
+        "type": [
+          "object"
+        ]
+      },
+      "title": "Create"
+    },
+    {
+      "description": "Delete an existing host.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/hosts/{(%2Fschemata%2Fhost%23%2Fdefinitions%2Fid)}",
+      "method": "DELETE",
+      "rel": "destroy",
+      "title": "Delete"
+    },
+    {
+      "description": "Info for existing host.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/hosts/{(%2Fschemata%2Fhost%23%2Fdefinitions%2Fid)}",
+      "method": "GET",
+      "rel": "self",
+      "title": "Info"
+    },
+    {
+      "description": "List existing hosts.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/hosts",
+      "method": "GET",
+      "rel": "instances",
+      "title": "List"
+    },
+    {
+      "description": "Update an existing host.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/hosts/{(%2Fschemata%2Fhost%23%2Fdefinitions%2Fid)}",
+      "method": "PATCH",
+      "rel": "update",
+      "schema": {
+        "properties": {
+        },
+        "type": [
+          "object"
+        ]
+      },
+      "title": "Update"
+    }
+  ],
+  "properties": {
+    "id": {
+      "$ref": "/schemata/host#/definitions/id"
+    },
+    "groupId": {
+      "$ref": "/schemata/host#/definitions/groupId"
+    },
+    "hostname": {
+      "$ref": "/schemata/host#/definitions/hostname"
+    },
+    "port": {
+      "$ref": "/schemata/host#/definitions/port"
+    },
+    "lastPing": {
+      "$ref": "/schemata/host#/definitions/lastPing"
+    },
+    "version": {
+      "$ref": "/schemata/host#/definitions/version"
+    },
+    "deactivated": {
+      "$ref": "/schemata/host#/definitions/deactivated"
+    },
+    "hasStartupWarnings": {
+      "$ref": "/schemata/host#/definitions/hasStartupWarnings"
+    },
+    "sslEnabled": {
+      "$ref": "/schemata/host#/definitions/sslEnabled"
+    },
+    "logsEnabled": {
+      "$ref": "/schemata/host#/definitions/logsEnabled"
+    },
+    "lastReactivated": {
+      "$ref": "/schemata/host#/definitions/lastReactivated"
+    },
+    "uptimeMsec": {
+      "$ref": "/schemata/host#/definitions/uptimeMsec"
+    },
+    "lastRestart": {
+      "$ref": "/schemata/host#/definitions/lastRestart"
+    },
+    "shardName": {
+      "$ref": "/schemata/host#/definitions/shardName"
+    },
+    "replicaSetName": {
+      "$ref": "/schemata/host#/definitions/replicaSetName"
+    },
+    "replicaStateName": {
+      "$ref": "/schemata/host#/definitions/replicaStateName"
+    },
+    "created": {
+      "$ref": "/schemata/host#/definitions/created"
+    },
+    "hostEnabled": {
+      "$ref": "/schemata/host#/definitions/hostEnabled"
+    },
+    "journalingEnabled": {
+      "$ref": "/schemata/host#/definitions/journalingEnabled"
+    },
+    "alertsEnabled": {
+      "$ref": "/schemata/host#/definitions/alertsEnabled"
+    },
+    "muninEnabled": {
+      "$ref": "/schemata/host#/definitions/muninEnabled"
+    },
+    "hidden": {
+      "$ref": "/schemata/host#/definitions/hidden"
+    },
+    "profilerEnabled": {
+      "$ref": "/schemata/host#/definitions/profilerEnabled"
+    },
+    "lowUlimit": {
+      "$ref": "/schemata/host#/definitions/lowUlimit"
+    },
+    "muninPort": {
+      "$ref": "/schemata/host#/definitions/muninPort"
+    },
+    "authMechanismName": {
+      "$ref": "/schemata/host#/definitions/authMechanismName"
+    },
+    "username": {
+      "$ref": "/schemata/host#/definitions/username"
+    },
+    "password": {
+      "$ref": "/schemata/host#/definitions/password"
+    }
+  },
+  "type": [
+    "object"
+  ],
+  "id": "schemata/host"
+}

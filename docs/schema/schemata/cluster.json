@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "title": "Cluster",
+  "definitions": {
+    "id": {
+      "description": "Unique identifier",
+      "example": "5196d3628d022db4cbc26d9e",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "groupId": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "typeName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "clusterName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "shardName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "replicaSetName": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "type": [
+        "string"
+      ]
+    },
+    "lastHeartbeat": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "description": "Working with MMS Clusters",
+  "links": [
+    {
+      "description": "Info for existing cluster.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/clusters/{(%2Fschemata%2Fcluster%23%2Fdefinitions%2Fid)}",
+      "method": "GET",
+      "rel": "self",
+      "title": "Info"
+    },
+    {
+      "description": "List existing clusters.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/clusters",
+      "method": "GET",
+      "rel": "instances",
+      "title": "List"
+    },
+    {
+      "description": "Update an existing cluster.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/clusters/{(%2Fschemata%2Fcluster%23%2Fdefinitions%2Fid)}",
+      "method": "PATCH",
+      "rel": "update",
+      "schema": {
+        "properties": {
+        },
+        "type": [
+          "object"
+        ]
+      },
+      "title": "Update"
+    }
+  ],
+  "properties": {
+    "id": {
+      "$ref": "/schemata/cluster#/definitions/id"
+    },
+    "groupId": {
+      "$ref": "/schemata/cluster#/definitions/groupId"
+    },
+    "typeName": {
+      "$ref": "/schemata/cluster#/definitions/typeName"
+    },
+    "clusterName": {
+      "$ref": "/schemata/cluster#/definitions/clusterName"
+    },
+    "shardName": {
+      "$ref": "/schemata/cluster#/definitions/shardName"
+    },
+    "replicaSetName": {
+      "$ref": "/schemata/cluster#/definitions/replicaSetName"
+    },
+    "lastHeartbeat": {
+      "$ref": "/schemata/cluster#/definitions/lastHeartbeat"
+    }
+  },
+  "type": [
+    "object"
+  ],
+  "id": "schemata/cluster"
+}

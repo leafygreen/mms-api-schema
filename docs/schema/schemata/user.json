@@ -52,7 +52,7 @@
       ]
     },
     "groupId": {
-      "description": "The groupId in which the user has the specified role. Note that for the “global” roles (those whose name starts with GLOBAL_) there is no groupId since these roles are not tied to a group.",
+      "description": "The groupId in which the user has the specified role. Note that for the 'global' roles (those whose name starts with GLOBAL_) there is no groupId since these roles are not tied to a group.",
       "example": "533daa30879bb2da07807696",
       "type": [
         "string"

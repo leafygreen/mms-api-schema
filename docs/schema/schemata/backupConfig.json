@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "title": "Backup Configurations",
+  "definitions": {
+    "clusterId": {
+      "description": "ID of the cluster that this backup configuration is for.",
+      "example": "API Example",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "groupId": {
+      "description": "ID of the group that owns this host.",
+      "example": "API Example",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "statusName": {
+      "description": "The current (or desired) status of the backup configuration. Possible values are: INACTIVE PROVISIONING STARTED STOPPED TERMINATING",
+      "example": "INACTIVE",
+      "type": [
+        "string"
+      ]
+    },
+    "username": {
+      "description": "The username to use to connect to the sync source database. Only present when auth is required to connect to the mongod being backed up.",
+      "example": "bob@gmail.com",
+      "type": [
+        "string"
+      ]
+    },
+    "password": {
+      "description": "The username to use to connect to the sync source database. Only present when auth is required to connect to the mongod being backed up.",
+      "example": "12!@hello",
+      "type": [
+        "string"
+      ]
+    },
+    "sslEnabled": {
+      "description": "Is SSL enabled for the sync source database?",
+      "example": "SECONDARY",
+      "type": [
+        "boolean"
+      ]
+    },
+    "syncSource": {
+      "description": "The database to use to get data to be backed up. Possible values are either a specific hostname or one of: PRIMARY SECONDARY. This field is only used when updating a backup configuration. It is not returned by a GET request.",
+      "example": "true",
+      "type": [
+        "string"
+      ]
+    },
+    "excludedNamespaces": {
+      "description": "A list of database names and/or collection names that should not be backed up. A string without a dot is assumed to be a database name; a string with a dot is assumed to mean dbName.collectionName.",
+      "example": "true",
+      "type": [
+        "array"
+      ]
+    }
+  },
+  "description": "Working with MMS Backup Configurations",
+  "links": [
+    {
+      "description": "Info for existing backupConfig.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/backupConfigs/{(%2Fschemata%2FbackupConfig%23%2Fdefinitions%2FclusterId)}",
+      "method": "GET",
+      "rel": "self",
+      "title": "Info"
+    },
+    {
+      "description": "List existing backupConfigs.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/backupConfigs",
+      "method": "GET",
+      "rel": "instances",
+      "title": "List"
+    },
+    {
+      "description": "Update an existing backupConfig.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/backupConfigs/{(%2Fschemata%2FbackupConfig%23%2Fdefinitions%2FclusterId)}",
+      "method": "PATCH",
+      "rel": "update",
+      "schema": {
+        "properties": {
+        },
+        "type": [
+          "object"
+        ]
+      },
+      "title": "Update"
+    }
+  ],
+  "properties": {
+    "clusterId": {
+      "$ref": "/schemata/backupConfig#/definitions/clusterId"
+    },
+    "groupId": {
+      "$ref": "/schemata/backupConfig#/definitions/groupId"
+    },
+    "statusName": {
+      "$ref": "/schemata/backupConfig#/definitions/statusName"
+    },
+    "username": {
+      "$ref": "/schemata/backupConfig#/definitions/username"
+    },
+    "password": {
+      "$ref": "/schemata/backupConfig#/definitions/password"
+    },
+    "sslEnabled": {
+      "$ref": "/schemata/backupConfig#/definitions/password"
+    },
+    "syncSource": {
+      "$ref": "/schemata/backupConfig#/definitions/password"
+    },
+    "excludedNamespaces": {
+      "$ref": "/schemata/backupConfig#/definitions/password"
+    }
+  },
+  "type": [
+    "object"
+  ],
+  "id": "schemata/backupConfig"
+}

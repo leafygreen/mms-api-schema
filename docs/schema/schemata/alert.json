@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "title": "Alert",
+  "definitions": {
+    "id": {
+      "description": "Unique identifier",
+      "example": "5196d3628d022db4cbc26d9e",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "groupId": {
+      "description": "ID of the group that this alert was opened for.",
+      "example": "API Example",
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "typeName": {
+      "description": "The type of alert. Possible values are: AGENT BACKUP HOST HOST_METRIC REPLICA_SET",
+      "example": "AGENT",
+      "type": [
+        "string"
+      ]
+    },
+    "eventTypeName": {
+      "description": "The name of the event that triggered the alert.",
+      "example": "MONITORING_AGENT_DOWN",
+      "type": [
+        "string"
+      ]
+    },
+    "status": {
+      "description": "The current state of the alert. Possible values are: OPEN CLOSED",
+      "example": "OPEN",
+      "type": [
+        "string"
+      ]
+    },
+    "acknowledgedUntil": {
+      "description": "The date through which the alert has been acknowledged. Will not be present if the alert has never been acknowledged.",
+      "example": "OPEN",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "created": {
+      "description": "When the alert was opened.",
+      "example": "OPEN",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "updated": {
+      "description": "When the alert was last updated.",
+      "example": "OPEN",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "resolved": {
+      "description": "When the alert was closed. Only present if the status is CLOSED.",
+      "example": "OPEN",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "lastNotified": {
+      "description": "When the last notification was sent for this alert. Only present if notifications have been sent.",
+      "example": "OPEN",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "metricName": {
+      "description": "The name of the metric whose value went outside the threshold. Only present for alerts of type HOST_METRIC",
+      "example": "ASSERT_REGULAR",
+      "type": [
+        "string"
+      ]
+    },
+    "number": {
+      "description": "The value of the metric.",
+      "example": "100.0",
+      "type": [
+        "number"
+      ]
+    },
+    "units": {
+      "description": "The units for the value. Depends on the type of metric. For example, a metric that measures memory consumption would have a byte measurement, while a metric that measures time would have a time unit. Possible values are: BITS KILOBITS MEGABITS GIGABITS BYTES KILOBYTES MEGABYTES GIGABYTES TERABYTES PETABYTES MILLISECONDS SECONDS MINUTES HOURS DAYS RAW",
+      "example": "BITS",
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "description": "Working with MMS Alerts",
+  "links": [
+    {
+      "description": "Info for existing alert.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/alerts/{(%2Fschemata%2Falert%23%2Fdefinitions%2Fid)}",
+      "method": "GET",
+      "rel": "self",
+      "title": "Info"
+    },
+    {
+      "description": "List existing alerts.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/alerts",
+      "method": "GET",
+      "rel": "instances",
+      "title": "List"
+    },
+    {
+      "description": "Update an existing alert.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/alerts/{(%2Fschemata%2Falert%23%2Fdefinitions%2Fid)}",
+      "method": "PATCH",
+      "rel": "update",
+      "schema": {
+        "properties": {
+        },
+        "type": [
+          "object"
+        ]
+      },
+      "title": "Update"
+    }
+  ],
+  "properties": {
+    "id": {
+      "$ref": "/schemata/alert#/definitions/id"
+    },
+    "groupId": {
+      "$ref": "/schemata/alert#/definitions/groupId"
+    },
+    "typeName": {
+      "$ref": "/schemata/alert#/definitions/typeName"
+    },
+    "eventTypeName": {
+      "$ref": "/schemata/alert#/definitions/eventTypeName"
+    },
+    "status": {
+      "$ref": "/schemata/alert#/definitions/status"
+    },
+    "acknowledgedUntil": {
+      "$ref": "/schemata/alert#/definitions/acknowledgedUntil"
+    },
+    "created": {
+      "$ref": "/schemata/alert#/definitions/created"
+    },
+    "updated": {
+      "$ref": "/schemata/alert#/definitions/updated"
+    },
+    "resolved": {
+      "$ref": "/schemata/alert#/definitions/resolved"
+    },
+    "lastNotified": {
+      "$ref": "/schemata/alert#/definitions/lastNotified"
+    },
+    "metricName": {
+      "$ref": "/schemata/alert#/definitions/metricName"
+    },
+    "currentValue": {
+      "description": "The current value of the metric that triggered the alert. Only present for alerts of type HOST_METRIC.",
+      "properties": {
+        "number": {
+          "$ref": "#/alert/definitions/number"
+        },
+        "units": {
+          "$ref": "#/alert/definitions/units"
+        }
+      },
+      "strictProperties": true,
+      "type": [
+        "object"
+      ]
+    }
+  },
+  "type": [
+    "object"
+  ],
+  "id": "schemata/alert"
+}
