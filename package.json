@@ -1,0 +1,24 @@
+{
+  "name": "mms-api-schema",
+  "version": "0.0.0",
+  "description": "JSON Schema definition of the MMS Public API (MongoDB Management Service)",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leafygreen/mms-api-schema.git"
+  },
+  "keywords": [
+    "mms",
+    "api",
+    "json",
+    "schema"
+  ],
+  "author": "dennis.kuczynski@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leafygreen/mms-api-schema/issues"
+  },
+  "homepage": "https://github.com/leafygreen/mms-api-schema"
+}
