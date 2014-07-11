@@ -8,7 +8,7 @@ This project is inspired by the work Heroku is doing their public API.
 
 ## Documentation
 
-[Auto-Generated Documentation](/docs/schema/schema.md)
+* [Auto-Generated Documentation](/docs/schema/schema.md)
 
 
 ## Consumers
