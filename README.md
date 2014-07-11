@@ -11,6 +11,13 @@ This project is inspired by the work Heroku is doing their public API.
 * [Auto-Generated Documentation](/docs/schema/schema.md)
 
 
+## Download with NPM
+
+`npm install mms-api-schema`
+
+* https://www.npmjs.org/package/mms-api-schema
+
+
 ## Consumers
 
 * [node-mms-client](https://github.com/leafygreen/node-mms-client)
