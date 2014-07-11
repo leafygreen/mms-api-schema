@@ -1,9 +1,9 @@
 {
  "description": "MMS Public API Description",
- "id": "http://api.mms.com/schema#",
+ "id": "http://leafygreen.github.io/mms-api-schema/schemas/v1.0#",
  "links": [{
    "href": "https://mms.mongodb.com/api/public/v1.0",
    "rel": "self"
  }],
- "title": "MMS Public API"
+ "title": "MMS Public API v1.0"
 }

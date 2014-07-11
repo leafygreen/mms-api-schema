@@ -12,7 +12,7 @@
     },
     "groupId": {
       "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "example": "5196d3628d022db4cbc26d9e",
       "format": "uuid",
       "type": [
         "string"
@@ -41,7 +41,7 @@
     },
     "acknowledgedUntil": {
       "description": "The date through which the alert has been acknowledged. Will not be present if the alert has never been acknowledged.",
-      "example": "OPEN",
+      "example": "2014-03-01T12:00:00Z",
       "format": "date-time",
       "type": [
         "string"
@@ -49,7 +49,7 @@
     },
     "created": {
       "description": "When the alert was opened.",
-      "example": "OPEN",
+      "example": "2014-03-01T12:00:00Z",
       "format": "date-time",
       "type": [
         "string"
@@ -57,7 +57,7 @@
     },
     "updated": {
       "description": "When the alert was last updated.",
-      "example": "OPEN",
+      "example": "2014-03-01T12:00:00Z",
       "format": "date-time",
       "type": [
         "string"
@@ -65,7 +65,7 @@
     },
     "resolved": {
       "description": "When the alert was closed. Only present if the status is CLOSED.",
-      "example": "OPEN",
+      "example": "2014-03-01T12:00:00Z",
       "format": "date-time",
       "type": [
         "string"
@@ -73,7 +73,7 @@
     },
     "lastNotified": {
       "description": "When the last notification was sent for this alert. Only present if notifications have been sent.",
-      "example": "OPEN",
+      "example": "2014-03-01T12:00:00Z",
       "format": "date-time",
       "type": [
         "string"
@@ -86,14 +86,14 @@
         "string"
       ]
     },
-    "number": {
+    "currentValue-number": {
       "description": "The value of the metric.",
       "example": "100.0",
       "type": [
         "number"
       ]
     },
-    "units": {
+    "currentValue-units": {
       "description": "The units for the value. Depends on the type of metric. For example, a metric that measures memory consumption would have a byte measurement, while a metric that measures time would have a time unit. Possible values are: BITS KILOBITS MEGABITS GIGABITS BYTES KILOBYTES MEGABYTES GIGABYTES TERABYTES PETABYTES MILLISECONDS SECONDS MINUTES HOURS DAYS RAW",
       "example": "BITS",
       "type": [
@@ -113,6 +113,13 @@
     {
       "description": "List existing alerts.",
       "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/alerts",
+      "method": "GET",
+      "rel": "instances",
+      "title": "List"
+    },
+    {
+      "description": "List existing alerts for specified alert config.",
+      "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/alertConfigs/{(%2Fschemata%2FalertConfig%23%2Fdefinitions%2Fid)}/alerts",
       "method": "GET",
       "rel": "instances",
       "title": "List"
@@ -170,10 +177,10 @@
       "description": "The current value of the metric that triggered the alert. Only present for alerts of type HOST_METRIC.",
       "properties": {
         "number": {
-          "$ref": "#/alert/definitions/number"
+          "$ref": "#/alert/definitions/currentValue-number"
         },
         "units": {
-          "$ref": "#/alert/definitions/units"
+          "$ref": "#/alert/definitions/currentValue-units"
         }
       },
       "strictProperties": true,

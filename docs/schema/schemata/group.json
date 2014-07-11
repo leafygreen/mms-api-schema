@@ -12,7 +12,7 @@
     },
     "name": {
       "description": "Display name for the group",
-      "example": "API Example",
+      "example": "My Group",
       "type": [
         "string"
       ]

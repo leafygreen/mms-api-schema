@@ -19,13 +19,14 @@
     },
     "password": {
       "description": "Password. This field is NOT included in the entity returned from the server. It can only be sent in the entity body when creating a new user.",
+      "example": "abc123",
       "type": [
         "string"
       ]
     },
     "emailAddress": {
       "description": "Email address",
-      "example": "jane.doe@gmail.com",
+      "example": "somebody@somewhere-else.com",
       "type": [
         "string"
       ]

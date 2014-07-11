@@ -4,216 +4,216 @@
   "definitions": {
     "id": {
       "description": "Unique identifier",
-      "example": "5196d3628d022db4cbc26d9e",
+      "example": "4059580c20c4581872ef24d0b8f5dca0",
       "format": "uuid",
       "type": [
         "string"
       ]
     },
     "groupId": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "ID of the group that owns this host.",
+      "example": "5196d3628d022db4cbc26d9e",
       "format": "uuid",
       "type": [
         "string"
       ]
     },
     "hostname": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Primary hostname. A host typically has several aliases, so the primary is the best available name as decided by MMS.",
+      "example": "localhost",
       "type": [
         "string"
       ]
     },
     "port": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Port that MongoDB process (mongod or mongos) listens on.",
+      "example": "27017",
       "type": [
         "integer"
       ]
     },
     "typeName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Type for this host. Possible values are: STANDALONE REPLICA_PRIMARY REPLICA_SECONDARY REPLICA_ARBITER RECOVERING MASTER SLAVE SHARD_MONGOS SHARD_CONFIG SHARD_STANDALONE SHARD_PRIMARY SHARD_SECONDARY",
+      "example": "STANDALONE",
       "type": [
         "string"
       ]
     },
     "lastPing": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "When the last ping for this host was received.",
+      "example": "2014-04-22T19:56:50Z",
       "format": "date-time",
       "type": [
         "string"
       ]
     },
     "ipAddress": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "IP address of this host.",
+      "example": "10.10.10.1",
       "type": [
         "string"
       ]
     },
     "version": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Version of MongoDB running on this host.",
+      "example": "2.6.3",
       "type": [
         "string"
       ]
     },
     "deactivated": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn’t received a ping from it in several days.",
+      "example": "false",
       "type": [
         "boolean"
       ]
     },
     "hasStartupWarnings": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Are there startup warnings for this host?",
+      "example": "false",
       "type": [
         "boolean"
       ]
     },
     "sslEnabled": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Is SSL enabled for this host?",
+      "example": "false",
       "type": [
         "boolean"
       ]
     },
     "logsEnabled": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Is MMS collecting logs for this host?",
+      "example": "false",
       "type": [
         "boolean"
       ]
     },
     "lastReactivated": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "The last time this has was manually reactivated.",
+      "example": "2014-04-22T19:56:50Z",
       "format": "date-time",
       "type": [
         "string"
       ]
     },
     "uptimeMsec": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Number of milliseconds since this host’s last restart.",
+      "example": "1024",
       "type": [
         "number"
       ]
     },
     "lastRestart": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Date this host was last restarted.",
+      "example": "2014-04-22T19:56:50Z",
       "format": "date-time",
       "type": [
         "string"
       ]
     },
     "shardName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Name of the shard this host belongs to. Only present if the host is part of a sharded cluster.",
+      "example": "myShard0",
       "type": [
         "string"
       ]
     },
     "replicaSetName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Name of the replica set this host belongs to. Only present if this host is part of a replica set.",
+      "example": "rs0",
       "type": [
         "string"
       ]
     },
     "replicaStateName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Current state of this host within a replica set. Only present if this host is part of a replica set. See Replica Set Member States for possible values.",
+      "example": "SECONDARY",
       "type": [
         "string"
       ]
     },
     "created": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Date this host was created or first discovered by MMS.",
+      "example": "2013-12-15T09:17:23Z",
       "format": "date-time",
       "type": [
         "string"
       ]
     },
     "hostEnabled": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Is this host currently enabled? Hosts can be manually disabled in the MMS UI.",
+      "example": "true",
       "type": [
         "boolean"
       ]
     },
     "journalingEnabled": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Is journaling enabled for this host?",
+      "example": "true",
       "type": [
         "boolean"
       ]
     },
     "alertsEnabled": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Are alerts enabled for this host?",
+      "example": "true",
       "type": [
         "boolean"
       ]
     },
     "muninEnabled": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Are Munin stats being collected for this host?",
+      "example": "true",
       "type": [
         "boolean"
       ]
     },
     "hidden": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Is this host currently hidden? When MMS deactivates a host, it will also mark it as hidden.",
+      "example": "false",
       "type": [
         "boolean"
       ]
     },
     "profilerEnabled": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Is MMS collecting profile information from this host?",
+      "example": "true",
       "type": [
         "boolean"
       ]
     },
     "lowUlimit": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Does this host have a low ulimit setting?",
+      "example": "false",
       "type": [
         "boolean"
       ]
     },
     "muninPort": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "What port should be used to collect Munin stats from this host?",
+      "example": "4949",
       "type": [
         "integer"
       ]
     },
     "authMechanismName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "The authentication mechanism used to connect to this host. Possible values are: MONGODB_CR GSSAPI NONE",
+      "example": "MONGODB_CR",
       "type": [
         "string"
       ]
     },
     "username": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Username for connecting to this host. Only present when the authMechanismName is MONGODB_CR.",
+      "example": "mongo",
       "type": [
         "string"
       ]
     },
     "password": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Password for connecting to this host. If a host’s authMechanismName is MONGODB_CR, then you must include this field when creating the host or updating its credentials. However, it will never be exposed when a host entity is returned.",
+      "example": "myM0NGO0!",
       "type": [
         "string"
       ]

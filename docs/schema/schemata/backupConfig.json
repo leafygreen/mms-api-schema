@@ -4,7 +4,7 @@
   "definitions": {
     "clusterId": {
       "description": "ID of the cluster that this backup configuration is for.",
-      "example": "API Example",
+      "example": "5196e5b0e4b0fca9cc88334a",
       "format": "uuid",
       "type": [
         "string"
@@ -12,7 +12,7 @@
     },
     "groupId": {
       "description": "ID of the group that owns this host.",
-      "example": "API Example",
+      "example": "5196d3628d022db4cbc26d9e",
       "format": "uuid",
       "type": [
         "string"
@@ -20,7 +20,7 @@
     },
     "statusName": {
       "description": "The current (or desired) status of the backup configuration. Possible values are: INACTIVE PROVISIONING STARTED STOPPED TERMINATING",
-      "example": "INACTIVE",
+      "example": "STARTED",
       "type": [
         "string"
       ]
@@ -41,21 +41,20 @@
     },
     "sslEnabled": {
       "description": "Is SSL enabled for the sync source database?",
-      "example": "SECONDARY",
+      "example": "false",
       "type": [
         "boolean"
       ]
     },
     "syncSource": {
       "description": "The database to use to get data to be backed up. Possible values are either a specific hostname or one of: PRIMARY SECONDARY. This field is only used when updating a backup configuration. It is not returned by a GET request.",
-      "example": "true",
+      "example": "SECONDARY",
       "type": [
         "string"
       ]
     },
     "excludedNamespaces": {
       "description": "A list of database names and/or collection names that should not be backed up. A string without a dot is assumed to be a database name; a string with a dot is assumed to mean dbName.collectionName.",
-      "example": "true",
       "type": [
         "array"
       ]

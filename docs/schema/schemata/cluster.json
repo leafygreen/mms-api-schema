@@ -11,44 +11,44 @@
       ]
     },
     "groupId": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "ID of the group that owns this cluster.",
+      "example": "533d7d4730040be257defe88",
       "format": "uuid",
       "type": [
         "string"
       ]
     },
     "typeName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Specifies what kind of cluster this is. Possible values are: MASTER_SLAVE REPLICA_SET SHARDED SHARDED_REPLICA_SET",
+      "example": "REPLICA_SET",
       "type": [
         "string"
       ]
     },
     "clusterName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Display name of the cluster. Only applies to sharded clusters. Note that mongod itself doesn’t allow you to name a cluster; this name is supplied by (and editable within) MMS. For a replica set within a sharded cluster, the cluster name is the name of its parent cluster.",
+      "example": "Cluster 0",
       "type": [
         "string"
       ]
     },
     "shardName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Name of the shard. Only present for a cluster of type SHARDED or REPLICA_SET that is part of a sharded cluster.",
+      "example": "shard001",
       "type": [
         "string"
       ]
     },
     "replicaSetName": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "Name of the replica set. Only present for a cluster of type REPLICA_SET.",
+      "example": "rs1",
       "type": [
         "string"
       ]
     },
     "lastHeartbeat": {
-      "description": "ID of the group that this alert was opened for.",
-      "example": "API Example",
+      "description": "The approximate last time MMS processed a ping from this cluster.",
+      "example": "2014-02-26T17:32:45Z",
       "format": "date-time",
       "type": [
         "string"
