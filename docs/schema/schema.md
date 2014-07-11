@@ -1,5 +1,3 @@
-# MMS Public API
-
 ## Alert
 Working with MMS Alerts
 
@@ -2177,13 +2175,13 @@ HTTP/1.1 200 OK
 Info for existing whitelist.
 
 ```
-GET /whitelists/{whitelist_id}
+GET /users/{user_id}/whitelist/{whitelist_id}
 ```
 
 
 #### Curl Example
 ```term
-$ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/whitelists/$WHITELIST_ID
+$ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/users/$USER_ID/whitelist/$WHITELIST_ID
 ```
 
 

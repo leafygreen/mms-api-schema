@@ -1651,7 +1651,7 @@
         },
         {
           "description": "Info for existing whitelist.",
-          "href": "/whitelists/{(%23%2Fdefinitions%2Fwhitelist%2Fdefinitions%2Fid)}",
+          "href": "/users/{(%23%2Fdefinitions%2Fuser%2Fdefinitions%2Fid)}/whitelist/{(%23%2Fdefinitions%2Fwhitelist%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
           "title": "Info"
