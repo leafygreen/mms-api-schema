@@ -165,7 +165,6 @@
           "$ref": "#/user/definitions/roleName"
         }
       },
-      "strictProperties": true,
       "type": [
         "object"
       ]

@@ -183,7 +183,6 @@
           "$ref": "#/alert/definitions/currentValue-units"
         }
       },
-      "strictProperties": true,
       "type": [
         "object"
       ]

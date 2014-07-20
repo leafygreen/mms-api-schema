@@ -63,7 +63,7 @@
       ]
     },
     "matchers-operator": {
-      "description": "The operator to test the field’s value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX",
+      "description": "The operator to test the field's value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX",
       "example": "EQUALS",
       "type": [
         "string"
@@ -297,7 +297,6 @@
           "$ref": "#/alertConfig/definitions/matchers-value"
         }
       },
-      "strictProperties": true,
       "type": [
         "object"
       ]
@@ -342,7 +341,6 @@
           "$ref": "#/alertConfig/definitions/notifications-serviceKey"
         }
       },
-      "strictProperties": true,
       "type": [
         "object"
       ]
@@ -366,7 +364,6 @@
           "$ref": "#/alertConfig/definitions/metricThreshold-mode"
         }
       },
-      "strictProperties": true,
       "type": [
         "object"
       ]

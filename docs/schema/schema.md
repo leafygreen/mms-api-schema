@@ -1,3 +1,5 @@
+# MMS Public API
+
 ## Alert
 Working with MMS Alerts
 
@@ -296,7 +298,7 @@ Working with MMS Alert Configurations
   <tr>
     <td><strong>matchers:operator</strong></td>
     <td><em>string</em></td>
-    <td>The operator to test the field’s value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX</td>
+    <td>The operator to test the field's value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX</td>
     <td><code>"EQUALS"</code></td>
   </tr>
   <tr>
@@ -931,7 +933,7 @@ Working with MMS Clusters
   <tr>
     <td><strong>clusterName</strong></td>
     <td><em>string</em></td>
-    <td>Display name of the cluster. Only applies to sharded clusters. Note that mongod itself doesn’t allow you to name a cluster; this name is supplied by (and editable within) MMS. For a replica set within a sharded cluster, the cluster name is the name of its parent cluster.</td>
+    <td>Display name of the cluster. Only applies to sharded clusters. Note that mongod itself doesn't allow you to name a cluster; this name is supplied by (and editable within) MMS. For a replica set within a sharded cluster, the cluster name is the name of its parent cluster.</td>
     <td><code>"Cluster 0"</code></td>
   </tr>
   <tr>
@@ -1353,7 +1355,7 @@ Working with MMS Hosts
   <tr>
     <td><strong>deactivated</strong></td>
     <td><em>boolean</em></td>
-    <td>Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn’t received a ping from it in several days.</td>
+    <td>Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn't received a ping from it in several days.</td>
     <td><code>"false"</code></td>
   </tr>
   <tr>
@@ -1443,7 +1445,7 @@ Working with MMS Hosts
   <tr>
     <td><strong>password</strong></td>
     <td><em>string</em></td>
-    <td>Password for connecting to this host. If a host’s authMechanismName is MONGODB_CR, then you must include this field when creating the host or updating its credentials. However, it will never be exposed when a host entity is returned.</td>
+    <td>Password for connecting to this host. If a host's authMechanismName is MONGODB_CR, then you must include this field when creating the host or updating its credentials. However, it will never be exposed when a host entity is returned.</td>
     <td><code>"myM0NGO0!"</code></td>
   </tr>
   <tr>
@@ -1485,7 +1487,7 @@ Working with MMS Hosts
   <tr>
     <td><strong>uptimeMsec</strong></td>
     <td><em>number</em></td>
-    <td>Number of milliseconds since this host’s last restart.</td>
+    <td>Number of milliseconds since this host's last restart.</td>
     <td><code>"1024"</code></td>
   </tr>
   <tr>

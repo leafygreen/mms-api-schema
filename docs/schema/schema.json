@@ -261,7 +261,7 @@
           ]
         },
         "matchers-operator": {
-          "description": "The operator to test the field’s value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX",
+          "description": "The operator to test the field's value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX",
           "example": "EQUALS",
           "type": [
             "string"
@@ -725,7 +725,7 @@
           ]
         },
         "clusterName": {
-          "description": "Display name of the cluster. Only applies to sharded clusters. Note that mongod itself doesn’t allow you to name a cluster; this name is supplied by (and editable within) MMS. For a replica set within a sharded cluster, the cluster name is the name of its parent cluster.",
+          "description": "Display name of the cluster. Only applies to sharded clusters. Note that mongod itself doesn't allow you to name a cluster; this name is supplied by (and editable within) MMS. For a replica set within a sharded cluster, the cluster name is the name of its parent cluster.",
           "example": "Cluster 0",
           "type": [
             "string"
@@ -1076,7 +1076,7 @@
           ]
         },
         "deactivated": {
-          "description": "Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn’t received a ping from it in several days.",
+          "description": "Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn't received a ping from it in several days.",
           "example": "false",
           "type": [
             "boolean"
@@ -1112,7 +1112,7 @@
           ]
         },
         "uptimeMsec": {
-          "description": "Number of milliseconds since this host’s last restart.",
+          "description": "Number of milliseconds since this host's last restart.",
           "example": "1024",
           "type": [
             "number"
@@ -1226,7 +1226,7 @@
           ]
         },
         "password": {
-          "description": "Password for connecting to this host. If a host’s authMechanismName is MONGODB_CR, then you must include this field when creating the host or updating its credentials. However, it will never be exposed when a host entity is returned.",
+          "description": "Password for connecting to this host. If a host's authMechanismName is MONGODB_CR, then you must include this field when creating the host or updating its credentials. However, it will never be exposed when a host entity is returned.",
           "example": "myM0NGO0!",
           "type": [
             "string"
@@ -1378,33 +1378,37 @@
     "root": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Root",
+      "description": "MMS API Information",
+      "type": [
+        "object"
+      ],
       "definitions": {
         "throttling": {
           "description": "Tells whether or not MMS is throttling data. This can be used as a simple indicator of the current health of MMS, since throttling is generally enabled when MMS is in an unhealthy state.",
+          "readOnly": true,
           "example": "false",
           "type": [
             "boolean"
           ]
         }
       },
-      "description": "MMS API Information",
       "links": [
         {
           "description": "Info for existing root.",
           "href": "",
           "method": "GET",
           "rel": "self",
-          "title": "Info"
+          "title": "Info",
+          "targetSchema": {
+            "$ref": "#/definitions/root"
+          }
         }
       ],
       "properties": {
         "throttling": {
           "$ref": "#/definitions/root/definitions/throttling"
         }
-      },
-      "type": [
-        "object"
-      ]
+      }
     },
     "user": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",

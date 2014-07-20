@@ -62,7 +62,7 @@
       ]
     },
     "deactivated": {
-      "description": "Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn’t received a ping from it in several days.",
+      "description": "Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn't received a ping from it in several days.",
       "example": "false",
       "type": [
         "boolean"
@@ -98,7 +98,7 @@
       ]
     },
     "uptimeMsec": {
-      "description": "Number of milliseconds since this host’s last restart.",
+      "description": "Number of milliseconds since this host's last restart.",
       "example": "1024",
       "type": [
         "number"
@@ -212,7 +212,7 @@
       ]
     },
     "password": {
-      "description": "Password for connecting to this host. If a host’s authMechanismName is MONGODB_CR, then you must include this field when creating the host or updating its credentials. However, it will never be exposed when a host entity is returned.",
+      "description": "Password for connecting to this host. If a host's authMechanismName is MONGODB_CR, then you must include this field when creating the host or updating its credentials. However, it will never be exposed when a host entity is returned.",
       "example": "myM0NGO0!",
       "type": [
         "string"

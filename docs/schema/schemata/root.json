@@ -1,9 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-04/hyper-schema",
   "title": "Root",
+  "description": "The root endpoint of MMS API links",
+  "type": [
+    "object"
+  ],
   "definitions": {
     "throttling": {
       "description": "Tells whether or not MMS is throttling data. This can be used as a simple indicator of the current health of MMS, since throttling is generally enabled when MMS is in an unhealthy state.",
+      "readOnly": true,
       "example": "false",
       "type": [
         "boolean"
@@ -17,7 +22,10 @@
       "href": "",
       "method": "GET",
       "rel": "self",
-      "title": "Info"
+      "title": "Info",
+      "targetSchema": {
+        "$ref": "/schemata/root"
+      }
     }
   ],
   "properties": {
@@ -25,6 +33,7 @@
       "$ref": "/schemata/root#/definitions/throttling"
     }
   },
+  "required": ["throttling"],
   "type": [
     "object"
   ],

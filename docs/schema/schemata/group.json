@@ -173,7 +173,6 @@
           "$ref": "#/group/definitions/slave"
         }
       },
-      "strictProperties": true,
       "type": [
         "object"
       ]
