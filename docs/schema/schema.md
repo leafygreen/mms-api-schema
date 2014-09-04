@@ -1,5 +1,3 @@
-# MMS Public API
-
 ## Alert
 Working with MMS Alerts
 
@@ -27,29 +25,29 @@ Working with MMS Alerts
     <td><strong>currentValue:number</strong></td>
     <td><em>number</em></td>
     <td>The value of the metric.</td>
-    <td><code>"100.0"</code></td>
+    <td><code>100.0</code></td>
   </tr>
   <tr>
     <td><strong>currentValue:units</strong></td>
     <td><em>string</em></td>
-    <td>The units for the value. Depends on the type of metric. For example, a metric that measures memory consumption would have a byte measurement, while a metric that measures time would have a time unit. Possible values are: BITS KILOBITS MEGABITS GIGABITS BYTES KILOBYTES MEGABYTES GIGABYTES TERABYTES PETABYTES MILLISECONDS SECONDS MINUTES HOURS DAYS RAW</td>
-    <td><code>"BITS"</code></td>
+    <td>The units in which the metric values are expressed.<br/><b>one of:</b><code>"RAW"</code> or <code>"BITS"</code> or <code>"KILOBITS"</code> or <code>"MEGABITS"</code> or <code>"GIGABITS"</code> or <code>"BYTES"</code> or <code>"KILOBYTES"</code> or <code>"MEGABYTES"</code> or <code>"GIGABYTES"</code> or <code>"TERABYTES"</code> or <code>"PETABYTES"</code> or <code>"MILLISECONDS"</code> or <code>"SECONDS"</code> or <code>"MINUTES"</code> or <code>"HOURS"</code> or <code>"DAYS"</code></td>
+    <td><code>"BYTES"</code></td>
   </tr>
   <tr>
     <td><strong>eventTypeName</strong></td>
     <td><em>string</em></td>
-    <td>The name of the event that triggered the alert.</td>
+    <td>The name of the event that triggered the alert. The possible values here depend on the typeName.</td>
     <td><code>"MONITORING_AGENT_DOWN"</code></td>
   </tr>
   <tr>
     <td><strong>groupId</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>ID of the group that this alert was opened for.</td>
     <td><code>"5196d3628d022db4cbc26d9e"</code></td>
   </tr>
   <tr>
     <td><strong>id</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>Unique identifier</td>
     <td><code>"5196d3628d022db4cbc26d9e"</code></td>
   </tr>
@@ -62,8 +60,8 @@ Working with MMS Alerts
   <tr>
     <td><strong>metricName</strong></td>
     <td><em>string</em></td>
-    <td>The name of the metric whose value went outside the threshold. Only present for alerts of type HOST_METRIC</td>
-    <td><code>"ASSERT_REGULAR"</code></td>
+    <td>The name of the metric.<br/><b>one of:</b><code>"ASSERT_MSG"</code> or <code>"ASSERT_REGULAR"</code> or <code>"ASSERT_USER"</code> or <code>"ASSERT_WARNING"</code> or <code>"BACKGROUND_FLUSH_AVG"</code> or <code>"COMPUTED_MEMORY"</code> or <code>"CONNECTIONS"</code> or <code>"CONNECTIONS_MAX"</code> or <code>"CURSORS_TOTAL_CLIENT_CURSORS_SIZE"</code> or <code>"CURSORS_TOTAL_OPEN"</code> or <code>"CURSORS_TOTAL_TIMED_OUT"</code> or <code>"DB_DATA_SIZE_TOTAL"</code> or <code>"DB_LOCK_PERCENTAGE"</code> or <code>"DB_ACCESSES_NOT_IN_MEMORY"</code> or <code>"DB_PAGE_FAULT_EXCEPTIONS_THROWN"</code> or <code>"DB_STORAGE_TOTAL"</code> or <code>"EFFECTIVE_LOCK_PERCENTAGE"</code> or <code>"EXTRA_INFO_PAGE_FAULTS"</code> or <code>"GLOBAL_ACCESSES_NOT_IN_MEMORY"</code> or <code>"GLOBAL_LOCK_CURRENT_QUEUE_READERS"</code> or <code>"GLOBAL_LOCK_CURRENT_QUEUE_TOTAL"</code> or <code>"GLOBAL_LOCK_CURRENT_QUEUE_WRITERS"</code> or <code>"GLOBAL_PAGE_FAULT_EXCEPTIONS_THROWN"</code> or <code>"INDEX_COUNTERS_BTREE_ACCESSES"</code> or <code>"INDEX_COUNTERS_BTREE_HITS"</code> or <code>"INDEX_COUNTERS_BTREE_MISSES"</code> or <code>"INDEX_COUNTERS_BTREE_MISS_RATIO"</code> or <code>"JOURNALING_COMMITS_IN_WRITE_LOCK"</code> or <code>"JOURNALING_MB"</code> or <code>"JOURNALING_WRITE_DATA_FILES_MB"</code> or <code>"MEMORY_MAPPED"</code> or <code>"MEMORY_RESIDENT"</code> or <code>"MEMORY_VIRTUAL"</code> or <code>"MUNIN_CPU_IOWAIT"</code> or <code>"MUNIN_CPU_IRQ"</code> or <code>"MUNIN_CPU_NICE"</code> or <code>"MUNIN_CPU_SOFTIRQ"</code> or <code>"MUNIN_CPU_STEAL"</code> or <code>"MUNIN_CPU_SYSTEM"</code> or <code>"MUNIN_CPU_USER"</code> or <code>"MUNIN_IOSTAT_OP_READ"</code> or <code>"MUNIN_IOSTAT_OP_WRITE"</code> or <code>"MUNIN_IOSTAT_TIME_READ"</code> or <code>"MUNIN_IOSTAT_TIME_WRITE"</code> or <code>"NETWORK_BYTES_IN"</code> or <code>"NETWORK_BYTES_OUT"</code> or <code>"NETWORK_NUM_REQUESTS"</code> or <code>"OPCOUNTER_CMD"</code> or <code>"OPCOUNTER_DELETE"</code> or <code>"OPCOUNTER_GETMORE"</code> or <code>"OPCOUNTER_INSERT"</code> or <code>"OPCOUNTER_QUERY"</code> or <code>"OPCOUNTER_REPL_CMD"</code> or <code>"OPCOUNTER_REPL_DELETE"</code> or <code>"OPCOUNTER_REPL_INSERT"</code> or <code>"OPCOUNTER_REPL_UPDATE"</code> or <code>"OPCOUNTER_UPDATE"</code> or <code>"OPLOG_MASTER_LAG_TIME_DIFF"</code> or <code>"OPLOG_MASTER_TIME"</code> or <code>"OPLOG_RATE_GB_PER_HOUR"</code> or <code>"OPLOG_SLAVE_LAG_MASTER_TIME"</code></td>
+    <td><code>"ASSERT_MSG"</code></td>
   </tr>
   <tr>
     <td><strong>resolved</strong></td>
@@ -74,13 +72,13 @@ Working with MMS Alerts
   <tr>
     <td><strong>status</strong></td>
     <td><em>string</em></td>
-    <td>The current state of the alert. Possible values are: OPEN CLOSED</td>
+    <td>The current state of the alert. Possible values are: OPEN CLOSED<br/><b>one of:</b><code>"OPEN"</code> or <code>"CLOSED"</code></td>
     <td><code>"OPEN"</code></td>
   </tr>
   <tr>
     <td><strong>typeName</strong></td>
     <td><em>string</em></td>
-    <td>The type of alert. Possible values are: AGENT BACKUP HOST HOST_METRIC REPLICA_SET</td>
+    <td>The type of alert.<br/><b>one of:</b><code>"AGENT"</code> or <code>"BACKUP"</code> or <code>"HOST"</code> or <code>"HOST_METRIC"</code> or <code>"REPLICA_SET"</code></td>
     <td><code>"AGENT"</code></td>
   </tr>
   <tr>
@@ -121,10 +119,10 @@ HTTP/1.1 200 OK
   "updated": "2014-03-01T12:00:00Z",
   "resolved": "2014-03-01T12:00:00Z",
   "lastNotified": "2014-03-01T12:00:00Z",
-  "metricName": "ASSERT_REGULAR",
+  "metricName": "ASSERT_MSG",
   "currentValue": {
-    "number": "100.0",
-    "units": "BITS"
+    "number": 100.0,
+    "units": "BYTES"
   }
 }
 ```
@@ -148,25 +146,28 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/alerts
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "5196d3628d022db4cbc26d9e",
-    "groupId": "5196d3628d022db4cbc26d9e",
-    "typeName": "AGENT",
-    "eventTypeName": "MONITORING_AGENT_DOWN",
-    "status": "OPEN",
-    "acknowledgedUntil": "2014-03-01T12:00:00Z",
-    "created": "2014-03-01T12:00:00Z",
-    "updated": "2014-03-01T12:00:00Z",
-    "resolved": "2014-03-01T12:00:00Z",
-    "lastNotified": "2014-03-01T12:00:00Z",
-    "metricName": "ASSERT_REGULAR",
-    "currentValue": {
-      "number": "100.0",
-      "units": "BITS"
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "id": "5196d3628d022db4cbc26d9e",
+      "groupId": "5196d3628d022db4cbc26d9e",
+      "typeName": "AGENT",
+      "eventTypeName": "MONITORING_AGENT_DOWN",
+      "status": "OPEN",
+      "acknowledgedUntil": "2014-03-01T12:00:00Z",
+      "created": "2014-03-01T12:00:00Z",
+      "updated": "2014-03-01T12:00:00Z",
+      "resolved": "2014-03-01T12:00:00Z",
+      "lastNotified": "2014-03-01T12:00:00Z",
+      "metricName": "ASSERT_MSG",
+      "currentValue": {
+        "number": 100.0,
+        "units": "BYTES"
+      }
     }
-  }
-]
+  ]
+}
 ```
 
 ### Alert List
@@ -188,25 +189,28 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/alertC
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "5196d3628d022db4cbc26d9e",
-    "groupId": "5196d3628d022db4cbc26d9e",
-    "typeName": "AGENT",
-    "eventTypeName": "MONITORING_AGENT_DOWN",
-    "status": "OPEN",
-    "acknowledgedUntil": "2014-03-01T12:00:00Z",
-    "created": "2014-03-01T12:00:00Z",
-    "updated": "2014-03-01T12:00:00Z",
-    "resolved": "2014-03-01T12:00:00Z",
-    "lastNotified": "2014-03-01T12:00:00Z",
-    "metricName": "ASSERT_REGULAR",
-    "currentValue": {
-      "number": "100.0",
-      "units": "BITS"
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "id": "5196d3628d022db4cbc26d9e",
+      "groupId": "5196d3628d022db4cbc26d9e",
+      "typeName": "AGENT",
+      "eventTypeName": "MONITORING_AGENT_DOWN",
+      "status": "OPEN",
+      "acknowledgedUntil": "2014-03-01T12:00:00Z",
+      "created": "2014-03-01T12:00:00Z",
+      "updated": "2014-03-01T12:00:00Z",
+      "resolved": "2014-03-01T12:00:00Z",
+      "lastNotified": "2014-03-01T12:00:00Z",
+      "metricName": "ASSERT_MSG",
+      "currentValue": {
+        "number": 100.0,
+        "units": "BYTES"
+      }
     }
-  }
-]
+  ]
+}
 ```
 
 ### Alert Update
@@ -220,6 +224,8 @@ PATCH /groups/{group_id}/alerts/{alert_id}
 #### Curl Example
 ```term
 $ curl -n -X PATCH https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/alerts/$ALERT_ID
+-H "Content-Type: application/json" \
+-d '{"id":"5196d3628d022db4cbc26d9e","groupId":"5196d3628d022db4cbc26d9e","typeName":"AGENT","eventTypeName":"MONITORING_AGENT_DOWN","status":"OPEN","acknowledgedUntil":"2014-03-01T12:00:00Z","created":"2014-03-01T12:00:00Z","updated":"2014-03-01T12:00:00Z","resolved":"2014-03-01T12:00:00Z","lastNotified":"2014-03-01T12:00:00Z","metricName":"ASSERT_MSG","currentValue":{"number":100.0,"units":"BYTES"}}'
 ```
 
 
@@ -239,10 +245,10 @@ HTTP/1.1 200 OK
   "updated": "2014-03-01T12:00:00Z",
   "resolved": "2014-03-01T12:00:00Z",
   "lastNotified": "2014-03-01T12:00:00Z",
-  "metricName": "ASSERT_REGULAR",
+  "metricName": "ASSERT_MSG",
   "currentValue": {
-    "number": "100.0",
-    "units": "BITS"
+    "number": 100.0,
+    "units": "BYTES"
   }
 }
 ```
@@ -269,151 +275,73 @@ Working with MMS Alert Configurations
     <td><strong>enabled</strong></td>
     <td><em>boolean</em></td>
     <td>Is this alert configuration enabled?</td>
-    <td><code>"true"</code></td>
+    <td><code>true</code></td>
   </tr>
   <tr>
     <td><strong>eventTypeName</strong></td>
     <td><em>string</em></td>
-    <td>The type of event that will trigger an alert. Supports the same values as the eventTypeName field of the alerts resource.</td>
-    <td><code>"OUTSIDE_METRIC_THRESHOLD"</code></td>
+    <td>The name of the event that triggered the alert. The possible values here depend on the typeName.</td>
+    <td><code>"MONITORING_AGENT_DOWN"</code></td>
   </tr>
   <tr>
     <td><strong>groupId</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>ID of the group that owns this alert configuration.</td>
     <td><code>"5196d3628d022db4cbc26d9e"</code></td>
   </tr>
   <tr>
     <td><strong>id</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>Unique identifier.</td>
     <td><code>"533dc40ae4b00835ff81eaee"</code></td>
   </tr>
   <tr>
-    <td><strong>matchers:fieldName</strong></td>
-    <td><em>string</em></td>
-    <td>The name of the field in the target object to match on. The available fields depend on the typeName:</td>
-    <td><code>"hostnameAndPort"</code></td>
-  </tr>
-  <tr>
-    <td><strong>matchers:operator</strong></td>
-    <td><em>string</em></td>
-    <td>The operator to test the field's value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX</td>
-    <td><code>"EQUALS"</code></td>
-  </tr>
-  <tr>
-    <td><strong>matchers:value</strong></td>
-    <td><em>string</em></td>
-    <td>The value to test with the specified operator. When matching on the TYPE_NAME field for a HOST or HOST_METRIC alert, the possible typeName values are: PRIMARY SECONDARY STANDALONE CONFIG MONGOS</td>
-    <td><code>"mongo.babypearfoo.com:27017"</code></td>
+    <td><strong>matchers</strong></td>
+    <td><em>array</em></td>
+    <td></td>
+    <td><code>[{"fieldName"=>"hostnameAndPort", "operator"=>"EQUALS", "value"=>"mongo.babypearfoo.com:27017"}]</code></td>
   </tr>
   <tr>
     <td><strong>metricThreshold:metricName</strong></td>
     <td><em>string</em></td>
-    <td>The name of the metric to check. Supports the same values as the metricName field of the alerts resource.</td>
-    <td><code>"MEMORY_RESIDENT"</code></td>
+    <td>The name of the metric.<br/><b>one of:</b><code>"ASSERT_MSG"</code> or <code>"ASSERT_REGULAR"</code> or <code>"ASSERT_USER"</code> or <code>"ASSERT_WARNING"</code> or <code>"BACKGROUND_FLUSH_AVG"</code> or <code>"COMPUTED_MEMORY"</code> or <code>"CONNECTIONS"</code> or <code>"CONNECTIONS_MAX"</code> or <code>"CURSORS_TOTAL_CLIENT_CURSORS_SIZE"</code> or <code>"CURSORS_TOTAL_OPEN"</code> or <code>"CURSORS_TOTAL_TIMED_OUT"</code> or <code>"DB_DATA_SIZE_TOTAL"</code> or <code>"DB_LOCK_PERCENTAGE"</code> or <code>"DB_ACCESSES_NOT_IN_MEMORY"</code> or <code>"DB_PAGE_FAULT_EXCEPTIONS_THROWN"</code> or <code>"DB_STORAGE_TOTAL"</code> or <code>"EFFECTIVE_LOCK_PERCENTAGE"</code> or <code>"EXTRA_INFO_PAGE_FAULTS"</code> or <code>"GLOBAL_ACCESSES_NOT_IN_MEMORY"</code> or <code>"GLOBAL_LOCK_CURRENT_QUEUE_READERS"</code> or <code>"GLOBAL_LOCK_CURRENT_QUEUE_TOTAL"</code> or <code>"GLOBAL_LOCK_CURRENT_QUEUE_WRITERS"</code> or <code>"GLOBAL_PAGE_FAULT_EXCEPTIONS_THROWN"</code> or <code>"INDEX_COUNTERS_BTREE_ACCESSES"</code> or <code>"INDEX_COUNTERS_BTREE_HITS"</code> or <code>"INDEX_COUNTERS_BTREE_MISSES"</code> or <code>"INDEX_COUNTERS_BTREE_MISS_RATIO"</code> or <code>"JOURNALING_COMMITS_IN_WRITE_LOCK"</code> or <code>"JOURNALING_MB"</code> or <code>"JOURNALING_WRITE_DATA_FILES_MB"</code> or <code>"MEMORY_MAPPED"</code> or <code>"MEMORY_RESIDENT"</code> or <code>"MEMORY_VIRTUAL"</code> or <code>"MUNIN_CPU_IOWAIT"</code> or <code>"MUNIN_CPU_IRQ"</code> or <code>"MUNIN_CPU_NICE"</code> or <code>"MUNIN_CPU_SOFTIRQ"</code> or <code>"MUNIN_CPU_STEAL"</code> or <code>"MUNIN_CPU_SYSTEM"</code> or <code>"MUNIN_CPU_USER"</code> or <code>"MUNIN_IOSTAT_OP_READ"</code> or <code>"MUNIN_IOSTAT_OP_WRITE"</code> or <code>"MUNIN_IOSTAT_TIME_READ"</code> or <code>"MUNIN_IOSTAT_TIME_WRITE"</code> or <code>"NETWORK_BYTES_IN"</code> or <code>"NETWORK_BYTES_OUT"</code> or <code>"NETWORK_NUM_REQUESTS"</code> or <code>"OPCOUNTER_CMD"</code> or <code>"OPCOUNTER_DELETE"</code> or <code>"OPCOUNTER_GETMORE"</code> or <code>"OPCOUNTER_INSERT"</code> or <code>"OPCOUNTER_QUERY"</code> or <code>"OPCOUNTER_REPL_CMD"</code> or <code>"OPCOUNTER_REPL_DELETE"</code> or <code>"OPCOUNTER_REPL_INSERT"</code> or <code>"OPCOUNTER_REPL_UPDATE"</code> or <code>"OPCOUNTER_UPDATE"</code> or <code>"OPLOG_MASTER_LAG_TIME_DIFF"</code> or <code>"OPLOG_MASTER_TIME"</code> or <code>"OPLOG_RATE_GB_PER_HOUR"</code> or <code>"OPLOG_SLAVE_LAG_MASTER_TIME"</code></td>
+    <td><code>"ASSERT_MSG"</code></td>
   </tr>
   <tr>
     <td><strong>metricThreshold:mode</strong></td>
     <td><em>string</em></td>
-    <td>The mode to use when computing the current metric value. Possible values are: AVERAGE TOTAL</td>
+    <td>The mode to use when computing the current metric value.<br/><b>one of:</b><code>"AVERAGE"</code> or <code>"TOTAL"</code></td>
     <td><code>"TOTAL"</code></td>
   </tr>
   <tr>
     <td><strong>metricThreshold:operator</strong></td>
     <td><em>string</em></td>
-    <td>The operator to apply when checking the current metric value against the threshold value. Possible values are: GREATER_THAN LESS_THAN</td>
+    <td>The operator to apply when checking the current metric value against the threshold value.<br/><b>one of:</b><code>"GREATER_THAN"</code> or <code>"LESS_THAN"</code></td>
     <td><code>"GREATER_THAN"</code></td>
   </tr>
   <tr>
     <td><strong>metricThreshold:threshold</strong></td>
     <td><em>integer</em></td>
     <td>The threshold value outside of which an alert will be triggered.</td>
-    <td><code>"7"</code></td>
+    <td><code>7</code></td>
   </tr>
   <tr>
     <td><strong>metricThreshold:units</strong></td>
     <td><em>string</em></td>
-    <td>The units for the threshold value. Supports the same values as the currentValue.units field of the alerts resource.</td>
-    <td><code>"GIGABYTES"</code></td>
+    <td>The units in which the metric values are expressed.<br/><b>one of:</b><code>"RAW"</code> or <code>"BITS"</code> or <code>"KILOBITS"</code> or <code>"MEGABITS"</code> or <code>"GIGABITS"</code> or <code>"BYTES"</code> or <code>"KILOBYTES"</code> or <code>"MEGABYTES"</code> or <code>"GIGABYTES"</code> or <code>"TERABYTES"</code> or <code>"PETABYTES"</code> or <code>"MILLISECONDS"</code> or <code>"SECONDS"</code> or <code>"MINUTES"</code> or <code>"HOURS"</code> or <code>"DAYS"</code></td>
+    <td><code>"BYTES"</code></td>
   </tr>
   <tr>
-    <td><strong>notifications:delayMin</strong></td>
-    <td><em>integer</em></td>
-    <td>The number of minutes to wait after an alert condition is detected before sending out the first notification.</td>
-    <td><code>"5"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:emailAddress</strong></td>
-    <td><em>string</em></td>
-    <td>The email address to which to send notification. Only present for notifications of type EMAIL.</td>
-    <td><code>"jane.doe@gmail.com"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:emailEnabled</strong></td>
-    <td><em>boolean</em></td>
-    <td>Should email notifications be sent? Only present for notifications of type GROUP and USER.</td>
-    <td><code>"true"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:intervalMin</strong></td>
-    <td><em>integer</em></td>
-    <td>The number of minutes to wait between succcessive notifications for unacknowledged alerts that are not resolved.</td>
-    <td><code>"0"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:mobileNumber</strong></td>
-    <td><em>string</em></td>
-    <td>Mobile number to send SMS messages to. Only present for notifications of type SMS.</td>
-    <td><code>"(212) 212-1212"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:notificationToken</strong></td>
-    <td><em>string</em></td>
-    <td>A HipChat API token. Only present for notifications of type HIP_CHAT.</td>
-    <td><code>"123456abcdef"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:roomName</strong></td>
-    <td><em>string</em></td>
-    <td>HipChat room name. Only present for notifications of type HIP_CHAT.</td>
-    <td><code>"Test Chat Room"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:serviceKey</strong></td>
-    <td><em>string</em></td>
-    <td>PagerDuty service key.</td>
-    <td><code>"123456abcdef"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:smsEnabled</strong></td>
-    <td><em>boolean</em></td>
-    <td>Should SMS notifications be sent? Only present for notifications of type GROUP and USER.</td>
-    <td><code>"true"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:snmpAddress</strong></td>
-    <td><em>string</em></td>
-    <td>Hostname and port to send SNMP traps to. Note that SNMP is only supported for On Premise MMS; also, at this time MMS is only able to send SNMP traps to the standard SNMP port (161).</td>
-    <td><code>"somedomain.com:161"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:typeName</strong></td>
-    <td><em>string</em></td>
-    <td>The type of alert notification. Possible values are: GROUP USER SMS EMAIL PAGER_DUTY HIPCHAT SNMP. Note that SNMP notifications are not available in the cloud version of MMS. This feature is only available to On Premise installations.</td>
-    <td><code>"SMS"</code></td>
-  </tr>
-  <tr>
-    <td><strong>notifications:username</strong></td>
-    <td><em>string</em></td>
-    <td>The name of an MMS user to which to send notifications. Only a user in the group that owns the alert configuration is allowed here.</td>
-    <td><code>"jane.doe@gmail.com"</code></td>
+    <td><strong>notifications</strong></td>
+    <td><em>array</em></td>
+    <td></td>
+    <td><code>[{"typeName"=>"SMS", "delayMin"=>5, "intervalMin"=>0, "emailAddress"=>"jane.doe@gmail.com", "notificationToken"=>"123456abcdef", "roomName"=>"Test Chat Room", "emailEnabled"=>true, "smsEnabled"=>true, "username"=>"jane.doe@gmail.com", "mobileNumber"=>"(212) 212-1212", "snmpAddress"=>"somedomain.com:161", "serviceKey"=>"123456abcdef"}]</code></td>
   </tr>
   <tr>
     <td><strong>typeName</strong></td>
     <td><em>string</em></td>
-    <td>The type of this alert configuration. Supports the same values as the typeName field of the alerts resource.</td>
-    <td><code>"HOST_METRIC"</code></td>
+    <td>The type of alert.<br/><b>one of:</b><code>"AGENT"</code> or <code>"BACKUP"</code> or <code>"HOST"</code> or <code>"HOST_METRIC"</code> or <code>"REPLICA_SET"</code></td>
+    <td><code>"AGENT"</code></td>
   </tr>
   <tr>
     <td><strong>updated</strong></td>
@@ -434,6 +362,8 @@ POST /groups/{group_id}/alertConfigs
 #### Curl Example
 ```term
 $ curl -n -X POST https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/alertConfigs
+-H "Content-Type: application/json" \
+-d '{"id":"533dc40ae4b00835ff81eaee","groupId":"5196d3628d022db4cbc26d9e","typeName":"AGENT","eventTypeName":"MONITORING_AGENT_DOWN","created":"2012-01-01T12:00:00Z","updated":"2012-01-01T12:00:00Z","enabled":true,"matchers":[{"fieldName":"hostnameAndPort","operator":"EQUALS","value":"mongo.babypearfoo.com:27017"}],"notifications":[{"typeName":"SMS","delayMin":5,"intervalMin":0,"emailAddress":"jane.doe@gmail.com","notificationToken":"123456abcdef","roomName":"Test Chat Room","emailEnabled":true,"smsEnabled":true,"username":"jane.doe@gmail.com","mobileNumber":"(212) 212-1212","snmpAddress":"somedomain.com:161","serviceKey":"123456abcdef"}],"metricThreshold":{"metricName":"ASSERT_MSG","operator":"GREATER_THAN","threshold":7,"units":"BYTES","mode":"TOTAL"}}'
 ```
 
 
@@ -445,35 +375,39 @@ HTTP/1.1 201 Created
 {
   "id": "533dc40ae4b00835ff81eaee",
   "groupId": "5196d3628d022db4cbc26d9e",
-  "typeName": "HOST_METRIC",
-  "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+  "typeName": "AGENT",
+  "eventTypeName": "MONITORING_AGENT_DOWN",
   "created": "2012-01-01T12:00:00Z",
   "updated": "2012-01-01T12:00:00Z",
-  "enabled": "true",
-  "matchers": {
-    "fieldName": "hostnameAndPort",
-    "operator": "EQUALS",
-    "value": "mongo.babypearfoo.com:27017"
-  },
-  "notifications": {
-    "typeName": "SMS",
-    "delayMin": "5",
-    "intervalMin": "0",
-    "emailAddress": "jane.doe@gmail.com",
-    "notificationToken": "123456abcdef",
-    "roomName": "Test Chat Room",
-    "emailEnabled": "true",
-    "smsEnabled": "true",
-    "username": "jane.doe@gmail.com",
-    "mobileNumber": "(212) 212-1212",
-    "snmpAddress": "somedomain.com:161",
-    "serviceKey": "123456abcdef"
-  },
+  "enabled": true,
+  "matchers": [
+    {
+      "fieldName": "hostnameAndPort",
+      "operator": "EQUALS",
+      "value": "mongo.babypearfoo.com:27017"
+    }
+  ],
+  "notifications": [
+    {
+      "typeName": "SMS",
+      "delayMin": 5,
+      "intervalMin": 0,
+      "emailAddress": "jane.doe@gmail.com",
+      "notificationToken": "123456abcdef",
+      "roomName": "Test Chat Room",
+      "emailEnabled": true,
+      "smsEnabled": true,
+      "username": "jane.doe@gmail.com",
+      "mobileNumber": "(212) 212-1212",
+      "snmpAddress": "somedomain.com:161",
+      "serviceKey": "123456abcdef"
+    }
+  ],
   "metricThreshold": {
-    "metricName": "MEMORY_RESIDENT",
+    "metricName": "ASSERT_MSG",
     "operator": "GREATER_THAN",
-    "threshold": "7",
-    "units": "GIGABYTES",
+    "threshold": 7,
+    "units": "BYTES",
     "mode": "TOTAL"
   }
 }
@@ -501,35 +435,39 @@ HTTP/1.1 200 OK
 {
   "id": "533dc40ae4b00835ff81eaee",
   "groupId": "5196d3628d022db4cbc26d9e",
-  "typeName": "HOST_METRIC",
-  "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+  "typeName": "AGENT",
+  "eventTypeName": "MONITORING_AGENT_DOWN",
   "created": "2012-01-01T12:00:00Z",
   "updated": "2012-01-01T12:00:00Z",
-  "enabled": "true",
-  "matchers": {
-    "fieldName": "hostnameAndPort",
-    "operator": "EQUALS",
-    "value": "mongo.babypearfoo.com:27017"
-  },
-  "notifications": {
-    "typeName": "SMS",
-    "delayMin": "5",
-    "intervalMin": "0",
-    "emailAddress": "jane.doe@gmail.com",
-    "notificationToken": "123456abcdef",
-    "roomName": "Test Chat Room",
-    "emailEnabled": "true",
-    "smsEnabled": "true",
-    "username": "jane.doe@gmail.com",
-    "mobileNumber": "(212) 212-1212",
-    "snmpAddress": "somedomain.com:161",
-    "serviceKey": "123456abcdef"
-  },
+  "enabled": true,
+  "matchers": [
+    {
+      "fieldName": "hostnameAndPort",
+      "operator": "EQUALS",
+      "value": "mongo.babypearfoo.com:27017"
+    }
+  ],
+  "notifications": [
+    {
+      "typeName": "SMS",
+      "delayMin": 5,
+      "intervalMin": 0,
+      "emailAddress": "jane.doe@gmail.com",
+      "notificationToken": "123456abcdef",
+      "roomName": "Test Chat Room",
+      "emailEnabled": true,
+      "smsEnabled": true,
+      "username": "jane.doe@gmail.com",
+      "mobileNumber": "(212) 212-1212",
+      "snmpAddress": "somedomain.com:161",
+      "serviceKey": "123456abcdef"
+    }
+  ],
   "metricThreshold": {
-    "metricName": "MEMORY_RESIDENT",
+    "metricName": "ASSERT_MSG",
     "operator": "GREATER_THAN",
-    "threshold": "7",
-    "units": "GIGABYTES",
+    "threshold": 7,
+    "units": "BYTES",
     "mode": "TOTAL"
   }
 }
@@ -557,35 +495,39 @@ HTTP/1.1 200 OK
 {
   "id": "533dc40ae4b00835ff81eaee",
   "groupId": "5196d3628d022db4cbc26d9e",
-  "typeName": "HOST_METRIC",
-  "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+  "typeName": "AGENT",
+  "eventTypeName": "MONITORING_AGENT_DOWN",
   "created": "2012-01-01T12:00:00Z",
   "updated": "2012-01-01T12:00:00Z",
-  "enabled": "true",
-  "matchers": {
-    "fieldName": "hostnameAndPort",
-    "operator": "EQUALS",
-    "value": "mongo.babypearfoo.com:27017"
-  },
-  "notifications": {
-    "typeName": "SMS",
-    "delayMin": "5",
-    "intervalMin": "0",
-    "emailAddress": "jane.doe@gmail.com",
-    "notificationToken": "123456abcdef",
-    "roomName": "Test Chat Room",
-    "emailEnabled": "true",
-    "smsEnabled": "true",
-    "username": "jane.doe@gmail.com",
-    "mobileNumber": "(212) 212-1212",
-    "snmpAddress": "somedomain.com:161",
-    "serviceKey": "123456abcdef"
-  },
+  "enabled": true,
+  "matchers": [
+    {
+      "fieldName": "hostnameAndPort",
+      "operator": "EQUALS",
+      "value": "mongo.babypearfoo.com:27017"
+    }
+  ],
+  "notifications": [
+    {
+      "typeName": "SMS",
+      "delayMin": 5,
+      "intervalMin": 0,
+      "emailAddress": "jane.doe@gmail.com",
+      "notificationToken": "123456abcdef",
+      "roomName": "Test Chat Room",
+      "emailEnabled": true,
+      "smsEnabled": true,
+      "username": "jane.doe@gmail.com",
+      "mobileNumber": "(212) 212-1212",
+      "snmpAddress": "somedomain.com:161",
+      "serviceKey": "123456abcdef"
+    }
+  ],
   "metricThreshold": {
-    "metricName": "MEMORY_RESIDENT",
+    "metricName": "ASSERT_MSG",
     "operator": "GREATER_THAN",
-    "threshold": "7",
-    "units": "GIGABYTES",
+    "threshold": 7,
+    "units": "BYTES",
     "mode": "TOTAL"
   }
 }
@@ -610,43 +552,50 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/alertC
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "533dc40ae4b00835ff81eaee",
-    "groupId": "5196d3628d022db4cbc26d9e",
-    "typeName": "HOST_METRIC",
-    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
-    "created": "2012-01-01T12:00:00Z",
-    "updated": "2012-01-01T12:00:00Z",
-    "enabled": "true",
-    "matchers": {
-      "fieldName": "hostnameAndPort",
-      "operator": "EQUALS",
-      "value": "mongo.babypearfoo.com:27017"
-    },
-    "notifications": {
-      "typeName": "SMS",
-      "delayMin": "5",
-      "intervalMin": "0",
-      "emailAddress": "jane.doe@gmail.com",
-      "notificationToken": "123456abcdef",
-      "roomName": "Test Chat Room",
-      "emailEnabled": "true",
-      "smsEnabled": "true",
-      "username": "jane.doe@gmail.com",
-      "mobileNumber": "(212) 212-1212",
-      "snmpAddress": "somedomain.com:161",
-      "serviceKey": "123456abcdef"
-    },
-    "metricThreshold": {
-      "metricName": "MEMORY_RESIDENT",
-      "operator": "GREATER_THAN",
-      "threshold": "7",
-      "units": "GIGABYTES",
-      "mode": "TOTAL"
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "id": "533dc40ae4b00835ff81eaee",
+      "groupId": "5196d3628d022db4cbc26d9e",
+      "typeName": "AGENT",
+      "eventTypeName": "MONITORING_AGENT_DOWN",
+      "created": "2012-01-01T12:00:00Z",
+      "updated": "2012-01-01T12:00:00Z",
+      "enabled": true,
+      "matchers": [
+        {
+          "fieldName": "hostnameAndPort",
+          "operator": "EQUALS",
+          "value": "mongo.babypearfoo.com:27017"
+        }
+      ],
+      "notifications": [
+        {
+          "typeName": "SMS",
+          "delayMin": 5,
+          "intervalMin": 0,
+          "emailAddress": "jane.doe@gmail.com",
+          "notificationToken": "123456abcdef",
+          "roomName": "Test Chat Room",
+          "emailEnabled": true,
+          "smsEnabled": true,
+          "username": "jane.doe@gmail.com",
+          "mobileNumber": "(212) 212-1212",
+          "snmpAddress": "somedomain.com:161",
+          "serviceKey": "123456abcdef"
+        }
+      ],
+      "metricThreshold": {
+        "metricName": "ASSERT_MSG",
+        "operator": "GREATER_THAN",
+        "threshold": 7,
+        "units": "BYTES",
+        "mode": "TOTAL"
+      }
     }
-  }
-]
+  ]
+}
 ```
 
 ### AlertConfig Replace
@@ -660,6 +609,8 @@ PUT /groups/{group_id}/alertConfigs/{alertConfig_id}
 #### Curl Example
 ```term
 $ curl -n -X PUT https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/alertConfigs/$ALERTCONFIG_ID
+-H "Content-Type: application/json" \
+-d '{"id":"533dc40ae4b00835ff81eaee","groupId":"5196d3628d022db4cbc26d9e","typeName":"AGENT","eventTypeName":"MONITORING_AGENT_DOWN","created":"2012-01-01T12:00:00Z","updated":"2012-01-01T12:00:00Z","enabled":true,"matchers":[{"fieldName":"hostnameAndPort","operator":"EQUALS","value":"mongo.babypearfoo.com:27017"}],"notifications":[{"typeName":"SMS","delayMin":5,"intervalMin":0,"emailAddress":"jane.doe@gmail.com","notificationToken":"123456abcdef","roomName":"Test Chat Room","emailEnabled":true,"smsEnabled":true,"username":"jane.doe@gmail.com","mobileNumber":"(212) 212-1212","snmpAddress":"somedomain.com:161","serviceKey":"123456abcdef"}],"metricThreshold":{"metricName":"ASSERT_MSG","operator":"GREATER_THAN","threshold":7,"units":"BYTES","mode":"TOTAL"}}'
 ```
 
 
@@ -671,35 +622,39 @@ HTTP/1.1 200 OK
 {
   "id": "533dc40ae4b00835ff81eaee",
   "groupId": "5196d3628d022db4cbc26d9e",
-  "typeName": "HOST_METRIC",
-  "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+  "typeName": "AGENT",
+  "eventTypeName": "MONITORING_AGENT_DOWN",
   "created": "2012-01-01T12:00:00Z",
   "updated": "2012-01-01T12:00:00Z",
-  "enabled": "true",
-  "matchers": {
-    "fieldName": "hostnameAndPort",
-    "operator": "EQUALS",
-    "value": "mongo.babypearfoo.com:27017"
-  },
-  "notifications": {
-    "typeName": "SMS",
-    "delayMin": "5",
-    "intervalMin": "0",
-    "emailAddress": "jane.doe@gmail.com",
-    "notificationToken": "123456abcdef",
-    "roomName": "Test Chat Room",
-    "emailEnabled": "true",
-    "smsEnabled": "true",
-    "username": "jane.doe@gmail.com",
-    "mobileNumber": "(212) 212-1212",
-    "snmpAddress": "somedomain.com:161",
-    "serviceKey": "123456abcdef"
-  },
+  "enabled": true,
+  "matchers": [
+    {
+      "fieldName": "hostnameAndPort",
+      "operator": "EQUALS",
+      "value": "mongo.babypearfoo.com:27017"
+    }
+  ],
+  "notifications": [
+    {
+      "typeName": "SMS",
+      "delayMin": 5,
+      "intervalMin": 0,
+      "emailAddress": "jane.doe@gmail.com",
+      "notificationToken": "123456abcdef",
+      "roomName": "Test Chat Room",
+      "emailEnabled": true,
+      "smsEnabled": true,
+      "username": "jane.doe@gmail.com",
+      "mobileNumber": "(212) 212-1212",
+      "snmpAddress": "somedomain.com:161",
+      "serviceKey": "123456abcdef"
+    }
+  ],
   "metricThreshold": {
-    "metricName": "MEMORY_RESIDENT",
+    "metricName": "ASSERT_MSG",
     "operator": "GREATER_THAN",
-    "threshold": "7",
-    "units": "GIGABYTES",
+    "threshold": 7,
+    "units": "BYTES",
     "mode": "TOTAL"
   }
 }
@@ -716,6 +671,8 @@ PATCH /groups/{group_id}/alertConfigs/{alertConfig_id}
 #### Curl Example
 ```term
 $ curl -n -X PATCH https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/alertConfigs/$ALERTCONFIG_ID
+-H "Content-Type: application/json" \
+-d '{"id":"533dc40ae4b00835ff81eaee","groupId":"5196d3628d022db4cbc26d9e","typeName":"AGENT","eventTypeName":"MONITORING_AGENT_DOWN","created":"2012-01-01T12:00:00Z","updated":"2012-01-01T12:00:00Z","enabled":true,"matchers":[{"fieldName":"hostnameAndPort","operator":"EQUALS","value":"mongo.babypearfoo.com:27017"}],"notifications":[{"typeName":"SMS","delayMin":5,"intervalMin":0,"emailAddress":"jane.doe@gmail.com","notificationToken":"123456abcdef","roomName":"Test Chat Room","emailEnabled":true,"smsEnabled":true,"username":"jane.doe@gmail.com","mobileNumber":"(212) 212-1212","snmpAddress":"somedomain.com:161","serviceKey":"123456abcdef"}],"metricThreshold":{"metricName":"ASSERT_MSG","operator":"GREATER_THAN","threshold":7,"units":"BYTES","mode":"TOTAL"}}'
 ```
 
 
@@ -727,35 +684,39 @@ HTTP/1.1 200 OK
 {
   "id": "533dc40ae4b00835ff81eaee",
   "groupId": "5196d3628d022db4cbc26d9e",
-  "typeName": "HOST_METRIC",
-  "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+  "typeName": "AGENT",
+  "eventTypeName": "MONITORING_AGENT_DOWN",
   "created": "2012-01-01T12:00:00Z",
   "updated": "2012-01-01T12:00:00Z",
-  "enabled": "true",
-  "matchers": {
-    "fieldName": "hostnameAndPort",
-    "operator": "EQUALS",
-    "value": "mongo.babypearfoo.com:27017"
-  },
-  "notifications": {
-    "typeName": "SMS",
-    "delayMin": "5",
-    "intervalMin": "0",
-    "emailAddress": "jane.doe@gmail.com",
-    "notificationToken": "123456abcdef",
-    "roomName": "Test Chat Room",
-    "emailEnabled": "true",
-    "smsEnabled": "true",
-    "username": "jane.doe@gmail.com",
-    "mobileNumber": "(212) 212-1212",
-    "snmpAddress": "somedomain.com:161",
-    "serviceKey": "123456abcdef"
-  },
+  "enabled": true,
+  "matchers": [
+    {
+      "fieldName": "hostnameAndPort",
+      "operator": "EQUALS",
+      "value": "mongo.babypearfoo.com:27017"
+    }
+  ],
+  "notifications": [
+    {
+      "typeName": "SMS",
+      "delayMin": 5,
+      "intervalMin": 0,
+      "emailAddress": "jane.doe@gmail.com",
+      "notificationToken": "123456abcdef",
+      "roomName": "Test Chat Room",
+      "emailEnabled": true,
+      "smsEnabled": true,
+      "username": "jane.doe@gmail.com",
+      "mobileNumber": "(212) 212-1212",
+      "snmpAddress": "somedomain.com:161",
+      "serviceKey": "123456abcdef"
+    }
+  ],
   "metricThreshold": {
-    "metricName": "MEMORY_RESIDENT",
+    "metricName": "ASSERT_MSG",
     "operator": "GREATER_THAN",
-    "threshold": "7",
-    "units": "GIGABYTES",
+    "threshold": 7,
+    "units": "BYTES",
     "mode": "TOTAL"
   }
 }
@@ -938,13 +899,13 @@ Working with MMS Clusters
   </tr>
   <tr>
     <td><strong>groupId</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>ID of the group that owns this cluster.</td>
     <td><code>"533d7d4730040be257defe88"</code></td>
   </tr>
   <tr>
     <td><strong>id</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>Unique identifier</td>
     <td><code>"5196d3628d022db4cbc26d9e"</code></td>
   </tr>
@@ -969,7 +930,7 @@ Working with MMS Clusters
   <tr>
     <td><strong>typeName</strong></td>
     <td><em>string</em></td>
-    <td>Specifies what kind of cluster this is. Possible values are: MASTER_SLAVE REPLICA_SET SHARDED SHARDED_REPLICA_SET</td>
+    <td>Specifies what kind of cluster this is.<br/><b>one of:</b><code>"MASTER_SLAVE"</code> or <code>"REPLICA_SET"</code> or <code>"SHARDED"</code> or <code>"SHARDED_REPLICA_SET"</code></td>
     <td><code>"REPLICA_SET"</code></td>
   </tr>
 </table>
@@ -1023,17 +984,20 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/cluste
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "5196d3628d022db4cbc26d9e",
-    "groupId": "533d7d4730040be257defe88",
-    "typeName": "REPLICA_SET",
-    "clusterName": "Cluster 0",
-    "shardName": "shard001",
-    "replicaSetName": "rs1",
-    "lastHeartbeat": "2014-02-26T17:32:45Z"
-  }
-]
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "id": "5196d3628d022db4cbc26d9e",
+      "groupId": "533d7d4730040be257defe88",
+      "typeName": "REPLICA_SET",
+      "clusterName": "Cluster 0",
+      "shardName": "shard001",
+      "replicaSetName": "rs1",
+      "lastHeartbeat": "2014-02-26T17:32:45Z"
+    }
+  ]
+}
 ```
 
 ### Cluster Update
@@ -1047,6 +1011,8 @@ PATCH /groups/{group_id}/clusters/{cluster_id}
 #### Curl Example
 ```term
 $ curl -n -X PATCH https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/clusters/$CLUSTER_ID
+-H "Content-Type: application/json" \
+-d '{"id":"5196d3628d022db4cbc26d9e","groupId":"533d7d4730040be257defe88","typeName":"REPLICA_SET","clusterName":"Cluster 0","shardName":"shard001","replicaSetName":"rs1","lastHeartbeat":"2014-02-26T17:32:45Z"}'
 ```
 
 
@@ -1087,48 +1053,48 @@ Working with MMS Groups
   <tr>
     <td><strong>hostsCounts:arbiter</strong></td>
     <td><em>integer</em></td>
-    <td>Number of arbiters in hostsCounts</td>
-    <td><code>"1"</code></td>
+    <td></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>hostsCounts:config</strong></td>
     <td><em>integer</em></td>
-    <td>Number of configs in hostsCounts</td>
-    <td><code>"1"</code></td>
+    <td></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>hostsCounts:master</strong></td>
     <td><em>integer</em></td>
-    <td>Number of masters in hostsCounts</td>
-    <td><code>"1"</code></td>
+    <td></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>hostsCounts:mongos</strong></td>
     <td><em>integer</em></td>
-    <td>Number of mongoss in hostsCounts</td>
-    <td><code>"1"</code></td>
+    <td></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>hostsCounts:primary</strong></td>
     <td><em>integer</em></td>
-    <td>Number of primaries in hostsCounts</td>
-    <td><code>"1"</code></td>
+    <td></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>hostsCounts:secondary</strong></td>
     <td><em>integer</em></td>
-    <td>Number of secondaries in hostsCounts</td>
-    <td><code>"1"</code></td>
+    <td></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>hostsCounts:slave</strong></td>
     <td><em>integer</em></td>
-    <td>Number of slaves in hostsCounts</td>
-    <td><code>"1"</code></td>
+    <td></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>id</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>Unique identifier</td>
     <td><code>"5196d3628d022db4cbc26d9e"</code></td>
   </tr>
@@ -1148,7 +1114,7 @@ Working with MMS Groups
     <td><strong>publicApiEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Is the Public API enabled for this group? This is a read-only field that will always be true for groups created with the API. Note that for groups created in the MMS UI, the only way to set this flag to true is by enabling the Public API for the group in the Settings tab.</td>
-    <td><code>"true"</code></td>
+    <td><code>true</code></td>
   </tr>
   <tr>
     <td><strong>replicaSetCount</strong></td>
@@ -1175,6 +1141,8 @@ POST /groups
 #### Curl Example
 ```term
 $ curl -n -X POST https://mms.mongodb.com/api/public/v1.0/groups
+-H "Content-Type: application/json" \
+-d '{"id":"5196d3628d022db4cbc26d9e","name":"My Group","hostsCounts":{"arbiter":1,"config":1,"primary":1,"secondary":1,"mongos":1,"master":1,"slave":1},"lastActiveAgent":"2012-01-01T12:00:00Z","activeAgentCount":"1","replicaSetCount":"1","shardCount":"1","publicApiEnabled":true}'
 ```
 
 
@@ -1187,19 +1155,19 @@ HTTP/1.1 201 Created
   "id": "5196d3628d022db4cbc26d9e",
   "name": "My Group",
   "hostsCounts": {
-    "arbiter": "1",
-    "config": "1",
-    "primary": "1",
-    "secondary": "1",
-    "mongos": "1",
-    "master": "1",
-    "slave": "1"
+    "arbiter": 1,
+    "config": 1,
+    "primary": 1,
+    "secondary": 1,
+    "mongos": 1,
+    "master": 1,
+    "slave": 1
   },
   "lastActiveAgent": "2012-01-01T12:00:00Z",
   "activeAgentCount": "1",
   "replicaSetCount": "1",
   "shardCount": "1",
-  "publicApiEnabled": "true"
+  "publicApiEnabled": true
 }
 ```
 
@@ -1226,19 +1194,19 @@ HTTP/1.1 200 OK
   "id": "5196d3628d022db4cbc26d9e",
   "name": "My Group",
   "hostsCounts": {
-    "arbiter": "1",
-    "config": "1",
-    "primary": "1",
-    "secondary": "1",
-    "mongos": "1",
-    "master": "1",
-    "slave": "1"
+    "arbiter": 1,
+    "config": 1,
+    "primary": 1,
+    "secondary": 1,
+    "mongos": 1,
+    "master": 1,
+    "slave": 1
   },
   "lastActiveAgent": "2012-01-01T12:00:00Z",
   "activeAgentCount": "1",
   "replicaSetCount": "1",
   "shardCount": "1",
-  "publicApiEnabled": "true"
+  "publicApiEnabled": true
 }
 ```
 
@@ -1265,19 +1233,19 @@ HTTP/1.1 200 OK
   "id": "5196d3628d022db4cbc26d9e",
   "name": "My Group",
   "hostsCounts": {
-    "arbiter": "1",
-    "config": "1",
-    "primary": "1",
-    "secondary": "1",
-    "mongos": "1",
-    "master": "1",
-    "slave": "1"
+    "arbiter": 1,
+    "config": 1,
+    "primary": 1,
+    "secondary": 1,
+    "mongos": 1,
+    "master": 1,
+    "slave": 1
   },
   "lastActiveAgent": "2012-01-01T12:00:00Z",
   "activeAgentCount": "1",
   "replicaSetCount": "1",
   "shardCount": "1",
-  "publicApiEnabled": "true"
+  "publicApiEnabled": true
 }
 ```
 
@@ -1300,26 +1268,29 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "5196d3628d022db4cbc26d9e",
-    "name": "My Group",
-    "hostsCounts": {
-      "arbiter": "1",
-      "config": "1",
-      "primary": "1",
-      "secondary": "1",
-      "mongos": "1",
-      "master": "1",
-      "slave": "1"
-    },
-    "lastActiveAgent": "2012-01-01T12:00:00Z",
-    "activeAgentCount": "1",
-    "replicaSetCount": "1",
-    "shardCount": "1",
-    "publicApiEnabled": "true"
-  }
-]
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "id": "5196d3628d022db4cbc26d9e",
+      "name": "My Group",
+      "hostsCounts": {
+        "arbiter": 1,
+        "config": 1,
+        "primary": 1,
+        "secondary": 1,
+        "mongos": 1,
+        "master": 1,
+        "slave": 1
+      },
+      "lastActiveAgent": "2012-01-01T12:00:00Z",
+      "activeAgentCount": "1",
+      "replicaSetCount": "1",
+      "shardCount": "1",
+      "publicApiEnabled": true
+    }
+  ]
+}
 ```
 
 
@@ -1338,12 +1309,12 @@ Working with MMS Hosts
     <td><strong>alertsEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Are alerts enabled for this host?</td>
-    <td><code>"true"</code></td>
+    <td><code>true</code></td>
   </tr>
   <tr>
     <td><strong>authMechanismName</strong></td>
     <td><em>string</em></td>
-    <td>The authentication mechanism used to connect to this host. Possible values are: MONGODB_CR GSSAPI NONE</td>
+    <td>The authentication mechanism used to connect to this host.<br/><b>one of:</b><code>"MONGODB_CR"</code> or <code>"GSSAPI"</code> or <code>"NONE"</code></td>
     <td><code>"MONGODB_CR"</code></td>
   </tr>
   <tr>
@@ -1356,11 +1327,11 @@ Working with MMS Hosts
     <td><strong>deactivated</strong></td>
     <td><em>boolean</em></td>
     <td>Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn't received a ping from it in several days.</td>
-    <td><code>"false"</code></td>
+    <td><code>false</code></td>
   </tr>
   <tr>
     <td><strong>groupId</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>ID of the group that owns this host.</td>
     <td><code>"5196d3628d022db4cbc26d9e"</code></td>
   </tr>
@@ -1368,19 +1339,19 @@ Working with MMS Hosts
     <td><strong>hasStartupWarnings</strong></td>
     <td><em>boolean</em></td>
     <td>Are there startup warnings for this host?</td>
-    <td><code>"false"</code></td>
+    <td><code>false</code></td>
   </tr>
   <tr>
     <td><strong>hidden</strong></td>
     <td><em>boolean</em></td>
     <td>Is this host currently hidden? When MMS deactivates a host, it will also mark it as hidden.</td>
-    <td><code>"false"</code></td>
+    <td><code>false</code></td>
   </tr>
   <tr>
     <td><strong>hostEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Is this host currently enabled? Hosts can be manually disabled in the MMS UI.</td>
-    <td><code>"true"</code></td>
+    <td><code>true</code></td>
   </tr>
   <tr>
     <td><strong>hostname</strong></td>
@@ -1390,7 +1361,7 @@ Working with MMS Hosts
   </tr>
   <tr>
     <td><strong>id</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>Unique identifier</td>
     <td><code>"4059580c20c4581872ef24d0b8f5dca0"</code></td>
   </tr>
@@ -1398,7 +1369,7 @@ Working with MMS Hosts
     <td><strong>journalingEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Is journaling enabled for this host?</td>
-    <td><code>"true"</code></td>
+    <td><code>true</code></td>
   </tr>
   <tr>
     <td><strong>lastPing</strong></td>
@@ -1422,25 +1393,25 @@ Working with MMS Hosts
     <td><strong>logsEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Is MMS collecting logs for this host?</td>
-    <td><code>"false"</code></td>
+    <td><code>false</code></td>
   </tr>
   <tr>
     <td><strong>lowUlimit</strong></td>
     <td><em>boolean</em></td>
     <td>Does this host have a low ulimit setting?</td>
-    <td><code>"false"</code></td>
+    <td><code>false</code></td>
   </tr>
   <tr>
     <td><strong>muninEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Are Munin stats being collected for this host?</td>
-    <td><code>"true"</code></td>
+    <td><code>true</code></td>
   </tr>
   <tr>
     <td><strong>muninPort</strong></td>
     <td><em>integer</em></td>
     <td>What port should be used to collect Munin stats from this host?</td>
-    <td><code>"4949"</code></td>
+    <td><code>4949</code></td>
   </tr>
   <tr>
     <td><strong>password</strong></td>
@@ -1452,13 +1423,13 @@ Working with MMS Hosts
     <td><strong>port</strong></td>
     <td><em>integer</em></td>
     <td>Port that MongoDB process (mongod or mongos) listens on.</td>
-    <td><code>"27017"</code></td>
+    <td><code>27017</code></td>
   </tr>
   <tr>
     <td><strong>profilerEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Is MMS collecting profile information from this host?</td>
-    <td><code>"true"</code></td>
+    <td><code>true</code></td>
   </tr>
   <tr>
     <td><strong>replicaSetName</strong></td>
@@ -1469,7 +1440,7 @@ Working with MMS Hosts
   <tr>
     <td><strong>replicaStateName</strong></td>
     <td><em>string</em></td>
-    <td>Current state of this host within a replica set. Only present if this host is part of a replica set. See Replica Set Member States for possible values.</td>
+    <td>Current state of this host within a replica set. Only present if this host is part of a replica set.<br/><b>one of:</b><code>"STARTUP"</code> or <code>"PRIMARY"</code> or <code>"SECONDARY"</code> or <code>"RECOVERING"</code> or <code>"FATAL"</code> or <code>"STARTUP2"</code> or <code>"UNKNOWN"</code> or <code>"ARBITER"</code> or <code>"DOWN"</code> or <code>"ROLLBACK"</code> or <code>"REMOVED"</code></td>
     <td><code>"SECONDARY"</code></td>
   </tr>
   <tr>
@@ -1482,13 +1453,13 @@ Working with MMS Hosts
     <td><strong>sslEnabled</strong></td>
     <td><em>boolean</em></td>
     <td>Is SSL enabled for this host?</td>
-    <td><code>"false"</code></td>
+    <td><code>false</code></td>
   </tr>
   <tr>
     <td><strong>uptimeMsec</strong></td>
-    <td><em>number</em></td>
+    <td><em>integer</em></td>
     <td>Number of milliseconds since this host's last restart.</td>
-    <td><code>"1024"</code></td>
+    <td><code>1024</code></td>
   </tr>
   <tr>
     <td><strong>username</strong></td>
@@ -1515,6 +1486,8 @@ POST /groups/{group_id}/hosts
 #### Curl Example
 ```term
 $ curl -n -X POST https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/hosts
+-H "Content-Type: application/json" \
+-d '{"id":"4059580c20c4581872ef24d0b8f5dca0","groupId":"5196d3628d022db4cbc26d9e","hostname":"localhost","port":27017,"lastPing":"2014-04-22T19:56:50Z","version":"2.6.3","deactivated":false,"hasStartupWarnings":false,"sslEnabled":false,"logsEnabled":false,"lastReactivated":"2014-04-22T19:56:50Z","uptimeMsec":1024,"lastRestart":"2014-04-22T19:56:50Z","shardName":"myShard0","replicaSetName":"rs0","replicaStateName":"SECONDARY","created":"2013-12-15T09:17:23Z","hostEnabled":true,"journalingEnabled":true,"alertsEnabled":true,"muninEnabled":true,"hidden":false,"profilerEnabled":true,"lowUlimit":false,"muninPort":4949,"authMechanismName":"MONGODB_CR","username":"mongo","password":"myM0NGO0!"}'
 ```
 
 
@@ -1527,28 +1500,28 @@ HTTP/1.1 201 Created
   "id": "4059580c20c4581872ef24d0b8f5dca0",
   "groupId": "5196d3628d022db4cbc26d9e",
   "hostname": "localhost",
-  "port": "27017",
+  "port": 27017,
   "lastPing": "2014-04-22T19:56:50Z",
   "version": "2.6.3",
-  "deactivated": "false",
-  "hasStartupWarnings": "false",
-  "sslEnabled": "false",
-  "logsEnabled": "false",
+  "deactivated": false,
+  "hasStartupWarnings": false,
+  "sslEnabled": false,
+  "logsEnabled": false,
   "lastReactivated": "2014-04-22T19:56:50Z",
-  "uptimeMsec": "1024",
+  "uptimeMsec": 1024,
   "lastRestart": "2014-04-22T19:56:50Z",
   "shardName": "myShard0",
   "replicaSetName": "rs0",
   "replicaStateName": "SECONDARY",
   "created": "2013-12-15T09:17:23Z",
-  "hostEnabled": "true",
-  "journalingEnabled": "true",
-  "alertsEnabled": "true",
-  "muninEnabled": "true",
-  "hidden": "false",
-  "profilerEnabled": "true",
-  "lowUlimit": "false",
-  "muninPort": "4949",
+  "hostEnabled": true,
+  "journalingEnabled": true,
+  "alertsEnabled": true,
+  "muninEnabled": true,
+  "hidden": false,
+  "profilerEnabled": true,
+  "lowUlimit": false,
+  "muninPort": 4949,
   "authMechanismName": "MONGODB_CR",
   "username": "mongo",
   "password": "myM0NGO0!"
@@ -1578,28 +1551,28 @@ HTTP/1.1 200 OK
   "id": "4059580c20c4581872ef24d0b8f5dca0",
   "groupId": "5196d3628d022db4cbc26d9e",
   "hostname": "localhost",
-  "port": "27017",
+  "port": 27017,
   "lastPing": "2014-04-22T19:56:50Z",
   "version": "2.6.3",
-  "deactivated": "false",
-  "hasStartupWarnings": "false",
-  "sslEnabled": "false",
-  "logsEnabled": "false",
+  "deactivated": false,
+  "hasStartupWarnings": false,
+  "sslEnabled": false,
+  "logsEnabled": false,
   "lastReactivated": "2014-04-22T19:56:50Z",
-  "uptimeMsec": "1024",
+  "uptimeMsec": 1024,
   "lastRestart": "2014-04-22T19:56:50Z",
   "shardName": "myShard0",
   "replicaSetName": "rs0",
   "replicaStateName": "SECONDARY",
   "created": "2013-12-15T09:17:23Z",
-  "hostEnabled": "true",
-  "journalingEnabled": "true",
-  "alertsEnabled": "true",
-  "muninEnabled": "true",
-  "hidden": "false",
-  "profilerEnabled": "true",
-  "lowUlimit": "false",
-  "muninPort": "4949",
+  "hostEnabled": true,
+  "journalingEnabled": true,
+  "alertsEnabled": true,
+  "muninEnabled": true,
+  "hidden": false,
+  "profilerEnabled": true,
+  "lowUlimit": false,
+  "muninPort": 4949,
   "authMechanismName": "MONGODB_CR",
   "username": "mongo",
   "password": "myM0NGO0!"
@@ -1629,28 +1602,28 @@ HTTP/1.1 200 OK
   "id": "4059580c20c4581872ef24d0b8f5dca0",
   "groupId": "5196d3628d022db4cbc26d9e",
   "hostname": "localhost",
-  "port": "27017",
+  "port": 27017,
   "lastPing": "2014-04-22T19:56:50Z",
   "version": "2.6.3",
-  "deactivated": "false",
-  "hasStartupWarnings": "false",
-  "sslEnabled": "false",
-  "logsEnabled": "false",
+  "deactivated": false,
+  "hasStartupWarnings": false,
+  "sslEnabled": false,
+  "logsEnabled": false,
   "lastReactivated": "2014-04-22T19:56:50Z",
-  "uptimeMsec": "1024",
+  "uptimeMsec": 1024,
   "lastRestart": "2014-04-22T19:56:50Z",
   "shardName": "myShard0",
   "replicaSetName": "rs0",
   "replicaStateName": "SECONDARY",
   "created": "2013-12-15T09:17:23Z",
-  "hostEnabled": "true",
-  "journalingEnabled": "true",
-  "alertsEnabled": "true",
-  "muninEnabled": "true",
-  "hidden": "false",
-  "profilerEnabled": "true",
-  "lowUlimit": "false",
-  "muninPort": "4949",
+  "hostEnabled": true,
+  "journalingEnabled": true,
+  "alertsEnabled": true,
+  "muninEnabled": true,
+  "hidden": false,
+  "profilerEnabled": true,
+  "lowUlimit": false,
+  "muninPort": 4949,
   "authMechanismName": "MONGODB_CR",
   "username": "mongo",
   "password": "myM0NGO0!"
@@ -1676,38 +1649,41 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/hosts
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "4059580c20c4581872ef24d0b8f5dca0",
-    "groupId": "5196d3628d022db4cbc26d9e",
-    "hostname": "localhost",
-    "port": "27017",
-    "lastPing": "2014-04-22T19:56:50Z",
-    "version": "2.6.3",
-    "deactivated": "false",
-    "hasStartupWarnings": "false",
-    "sslEnabled": "false",
-    "logsEnabled": "false",
-    "lastReactivated": "2014-04-22T19:56:50Z",
-    "uptimeMsec": "1024",
-    "lastRestart": "2014-04-22T19:56:50Z",
-    "shardName": "myShard0",
-    "replicaSetName": "rs0",
-    "replicaStateName": "SECONDARY",
-    "created": "2013-12-15T09:17:23Z",
-    "hostEnabled": "true",
-    "journalingEnabled": "true",
-    "alertsEnabled": "true",
-    "muninEnabled": "true",
-    "hidden": "false",
-    "profilerEnabled": "true",
-    "lowUlimit": "false",
-    "muninPort": "4949",
-    "authMechanismName": "MONGODB_CR",
-    "username": "mongo",
-    "password": "myM0NGO0!"
-  }
-]
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "id": "4059580c20c4581872ef24d0b8f5dca0",
+      "groupId": "5196d3628d022db4cbc26d9e",
+      "hostname": "localhost",
+      "port": 27017,
+      "lastPing": "2014-04-22T19:56:50Z",
+      "version": "2.6.3",
+      "deactivated": false,
+      "hasStartupWarnings": false,
+      "sslEnabled": false,
+      "logsEnabled": false,
+      "lastReactivated": "2014-04-22T19:56:50Z",
+      "uptimeMsec": 1024,
+      "lastRestart": "2014-04-22T19:56:50Z",
+      "shardName": "myShard0",
+      "replicaSetName": "rs0",
+      "replicaStateName": "SECONDARY",
+      "created": "2013-12-15T09:17:23Z",
+      "hostEnabled": true,
+      "journalingEnabled": true,
+      "alertsEnabled": true,
+      "muninEnabled": true,
+      "hidden": false,
+      "profilerEnabled": true,
+      "lowUlimit": false,
+      "muninPort": 4949,
+      "authMechanismName": "MONGODB_CR",
+      "username": "mongo",
+      "password": "myM0NGO0!"
+    }
+  ]
+}
 ```
 
 ### Host Update
@@ -1721,6 +1697,8 @@ PATCH /groups/{group_id}/hosts/{host_id}
 #### Curl Example
 ```term
 $ curl -n -X PATCH https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/hosts/$HOST_ID
+-H "Content-Type: application/json" \
+-d '{"id":"4059580c20c4581872ef24d0b8f5dca0","groupId":"5196d3628d022db4cbc26d9e","hostname":"localhost","port":27017,"lastPing":"2014-04-22T19:56:50Z","version":"2.6.3","deactivated":false,"hasStartupWarnings":false,"sslEnabled":false,"logsEnabled":false,"lastReactivated":"2014-04-22T19:56:50Z","uptimeMsec":1024,"lastRestart":"2014-04-22T19:56:50Z","shardName":"myShard0","replicaSetName":"rs0","replicaStateName":"SECONDARY","created":"2013-12-15T09:17:23Z","hostEnabled":true,"journalingEnabled":true,"alertsEnabled":true,"muninEnabled":true,"hidden":false,"profilerEnabled":true,"lowUlimit":false,"muninPort":4949,"authMechanismName":"MONGODB_CR","username":"mongo","password":"myM0NGO0!"}'
 ```
 
 
@@ -1733,33 +1711,183 @@ HTTP/1.1 200 OK
   "id": "4059580c20c4581872ef24d0b8f5dca0",
   "groupId": "5196d3628d022db4cbc26d9e",
   "hostname": "localhost",
-  "port": "27017",
+  "port": 27017,
   "lastPing": "2014-04-22T19:56:50Z",
   "version": "2.6.3",
-  "deactivated": "false",
-  "hasStartupWarnings": "false",
-  "sslEnabled": "false",
-  "logsEnabled": "false",
+  "deactivated": false,
+  "hasStartupWarnings": false,
+  "sslEnabled": false,
+  "logsEnabled": false,
   "lastReactivated": "2014-04-22T19:56:50Z",
-  "uptimeMsec": "1024",
+  "uptimeMsec": 1024,
   "lastRestart": "2014-04-22T19:56:50Z",
   "shardName": "myShard0",
   "replicaSetName": "rs0",
   "replicaStateName": "SECONDARY",
   "created": "2013-12-15T09:17:23Z",
-  "hostEnabled": "true",
-  "journalingEnabled": "true",
-  "alertsEnabled": "true",
-  "muninEnabled": "true",
-  "hidden": "false",
-  "profilerEnabled": "true",
-  "lowUlimit": "false",
-  "muninPort": "4949",
+  "hostEnabled": true,
+  "journalingEnabled": true,
+  "alertsEnabled": true,
+  "muninEnabled": true,
+  "hidden": false,
+  "profilerEnabled": true,
+  "lowUlimit": false,
+  "muninPort": 4949,
   "authMechanismName": "MONGODB_CR",
   "username": "mongo",
   "password": "myM0NGO0!"
 }
 ```
+
+### Host Metrics
+Available metrics for existing host.
+
+```
+GET /groups/{group_id}/hosts/{host_id}/metrics
+```
+
+
+#### Curl Example
+```term
+$ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/hosts/$HOST_ID/metrics
+```
+
+
+#### Response Example
+```
+HTTP/1.1 200 OK
+```
+```json
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "hostId": "680ab316473d6b28f966364b947134fc",
+      "groupId": "2847387cd717dabc348a",
+      "metricName": "ASSERT_MSG",
+      "units": "BYTES",
+      "granularity": "MINUTE",
+      "deviceName": "xxx",
+      "databaseName": "mydb",
+      "dataPoints": [
+        {
+          "timestamp": "2014-08-29T14:00:00Z",
+          "value": 381.2
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Host Metric
+Get the data points for the specified host and metric.
+
+```
+GET /groups/{group_id}/hosts/{host_id}/metrics/{metric_metricName}
+```
+
+
+#### Curl Example
+```term
+$ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/hosts/$HOST_ID/metrics/$METRIC_METRICNAME
+```
+
+
+#### Response Example
+```
+HTTP/1.1 200 OK
+```
+```json
+{
+  "hostId": "680ab316473d6b28f966364b947134fc",
+  "groupId": "2847387cd717dabc348a",
+  "metricName": "ASSERT_MSG",
+  "units": "BYTES",
+  "granularity": "MINUTE",
+  "deviceName": "xxx",
+  "databaseName": "mydb",
+  "dataPoints": [
+    {
+      "timestamp": "2014-08-29T14:00:00Z",
+      "value": 381.2
+    }
+  ]
+}
+```
+
+### Host Database Metric
+Get the data points for the specified host, db, and metric.
+
+```
+GET /groups/{group_id}/hosts/{host_id}/metrics/{metric_metricName}/{metric_databaseName}
+```
+
+
+#### Curl Example
+```term
+$ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/hosts/$HOST_ID/metrics/$METRIC_METRICNAME/$METRIC_DATABASENAME
+```
+
+
+#### Response Example
+```
+HTTP/1.1 200 OK
+```
+```json
+{
+  "hostId": "680ab316473d6b28f966364b947134fc",
+  "groupId": "2847387cd717dabc348a",
+  "metricName": "ASSERT_MSG",
+  "units": "BYTES",
+  "granularity": "MINUTE",
+  "deviceName": "xxx",
+  "databaseName": "mydb",
+  "dataPoints": [
+    {
+      "timestamp": "2014-08-29T14:00:00Z",
+      "value": 381.2
+    }
+  ]
+}
+```
+
+### Host Device Metric
+Get the data points for the specified host, device and metric.
+
+```
+GET /groups/{group_id}/hosts/{host_id}/metrics/{metric_metricName}/{metric_deviceName}
+```
+
+
+#### Curl Example
+```term
+$ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/hosts/$HOST_ID/metrics/$METRIC_METRICNAME/$METRIC_DEVICENAME
+```
+
+
+#### Response Example
+```
+HTTP/1.1 200 OK
+```
+```json
+{
+  "hostId": "680ab316473d6b28f966364b947134fc",
+  "groupId": "2847387cd717dabc348a",
+  "metricName": "ASSERT_MSG",
+  "units": "BYTES",
+  "granularity": "MINUTE",
+  "deviceName": "xxx",
+  "databaseName": "mydb",
+  "dataPoints": [
+    {
+      "timestamp": "2014-08-29T14:00:00Z",
+      "value": 381.2
+    }
+  ]
+}
+```
+
 
 
 ## Root
@@ -1777,7 +1905,7 @@ MMS API Information
     <td><strong>throttling</strong></td>
     <td><em>boolean</em></td>
     <td>Tells whether or not MMS is throttling data. This can be used as a simple indicator of the current health of MMS, since throttling is generally enabled when MMS is in an unhealthy state.</td>
-    <td><code>"false"</code></td>
+    <td><code>false</code></td>
   </tr>
 </table>
 
@@ -1801,7 +1929,7 @@ HTTP/1.1 200 OK
 ```
 ```json
 {
-  "throttling": "false"
+  "throttling": false
 }
 ```
 
@@ -1821,7 +1949,7 @@ Working with MMS Users
     <td><strong>emailAddress</strong></td>
     <td><em>string</em></td>
     <td>Email address</td>
-    <td><code>"somebody@somewhere-else.com"</code></td>
+    <td><code>"jane.doe@mongodb.com"</code></td>
   </tr>
   <tr>
     <td><strong>firstName</strong></td>
@@ -1831,9 +1959,9 @@ Working with MMS Users
   </tr>
   <tr>
     <td><strong>id</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>Unique identifier</td>
-    <td><code>"5196d3628d022db4cbc26d9e"</code></td>
+    <td><code>"533dc19ce4b00835ff81e2eb"</code></td>
   </tr>
   <tr>
     <td><strong>lastName</strong></td>
@@ -1845,25 +1973,19 @@ Working with MMS Users
     <td><strong>mobileNumber</strong></td>
     <td><em>string</em></td>
     <td>Mobile number. This field can only be set or edited using the MMS UI because it is tied to two factor authentication</td>
-    <td><code>"555-555-5555"</code></td>
+    <td><code>"2125551234"</code></td>
   </tr>
   <tr>
     <td><strong>password</strong></td>
     <td><em>string</em></td>
     <td>Password. This field is NOT included in the entity returned from the server. It can only be sent in the entity body when creating a new user.</td>
-    <td><code>"abc123"</code></td>
+    <td><code>"M0ng0D8!:)"</code></td>
   </tr>
   <tr>
-    <td><strong>roles:groupId</strong></td>
-    <td><em>string</em></td>
-    <td>The groupId in which the user has the specified role. Note that for the 'global' roles (those whose name starts with GLOBAL_) there is no groupId since these roles are not tied to a group.</td>
-    <td><code>"533daa30879bb2da07807696"</code></td>
-  </tr>
-  <tr>
-    <td><strong>roles:roleName</strong></td>
-    <td><em>string</em></td>
-    <td>The name of the role. Possible values are: GLOBAL_AUTOMATION_ADMIN GLOBAL_BACKUP_ADMIN GLOBAL_MONITORING_ADMIN GLOBAL_OWNER GLOBAL_READ_ONLY GLOBAL_USER_ADMIN GROUP_AUTOMATION_ADMIN GROUP_BACKUP_ADMIN GROUP_MONITORING_ADMIN GROUP_OWNER GROUP_READ_ONLY GROUP_USER_ADMIN</td>
-    <td><code>"GROUP_USER_ADMIN"</code></td>
+    <td><strong>roles</strong></td>
+    <td><em>array</em></td>
+    <td>Role assignments</td>
+    <td><code>[{"groupId"=>"8491812938cbda83918c", "roleName"=>"GROUP_OWNER"}]</code></td>
   </tr>
   <tr>
     <td><strong>username</strong></td>
@@ -1884,6 +2006,8 @@ POST /users
 #### Curl Example
 ```term
 $ curl -n -X POST https://mms.mongodb.com/api/public/v1.0/users
+-H "Content-Type: application/json" \
+-d '{"id":"533dc19ce4b00835ff81e2eb","username":"jane.doe@mongodb.com","password":"M0ng0D8!:)","emailAddress":"jane.doe@mongodb.com","mobileNumber":"2125551234","firstName":"Jane","lastName":"Doe","roles":[{"groupId":"8491812938cbda83918c","roleName":"GROUP_OWNER"}]}'
 ```
 
 
@@ -1893,17 +2017,19 @@ HTTP/1.1 201 Created
 ```
 ```json
 {
-  "id": "5196d3628d022db4cbc26d9e",
+  "id": "533dc19ce4b00835ff81e2eb",
   "username": "jane.doe@mongodb.com",
-  "password": "abc123",
-  "emailAddress": "somebody@somewhere-else.com",
-  "mobileNumber": "555-555-5555",
+  "password": "M0ng0D8!:)",
+  "emailAddress": "jane.doe@mongodb.com",
+  "mobileNumber": "2125551234",
   "firstName": "Jane",
   "lastName": "Doe",
-  "roles": {
-    "groupId": "533daa30879bb2da07807696",
-    "roleName": "GROUP_USER_ADMIN"
-  }
+  "roles": [
+    {
+      "groupId": "8491812938cbda83918c",
+      "roleName": "GROUP_OWNER"
+    }
+  ]
 }
 ```
 
@@ -1918,6 +2044,8 @@ POST /groups/{group_id}/users
 #### Curl Example
 ```term
 $ curl -n -X POST https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/users
+-H "Content-Type: application/json" \
+-d '{"id":"533dc19ce4b00835ff81e2eb","username":"jane.doe@mongodb.com","password":"M0ng0D8!:)","emailAddress":"jane.doe@mongodb.com","mobileNumber":"2125551234","firstName":"Jane","lastName":"Doe","roles":[{"groupId":"8491812938cbda83918c","roleName":"GROUP_OWNER"}]}'
 ```
 
 
@@ -1927,17 +2055,19 @@ HTTP/1.1 201 Created
 ```
 ```json
 {
-  "id": "5196d3628d022db4cbc26d9e",
+  "id": "533dc19ce4b00835ff81e2eb",
   "username": "jane.doe@mongodb.com",
-  "password": "abc123",
-  "emailAddress": "somebody@somewhere-else.com",
-  "mobileNumber": "555-555-5555",
+  "password": "M0ng0D8!:)",
+  "emailAddress": "jane.doe@mongodb.com",
+  "mobileNumber": "2125551234",
   "firstName": "Jane",
   "lastName": "Doe",
-  "roles": {
-    "groupId": "533daa30879bb2da07807696",
-    "roleName": "GROUP_USER_ADMIN"
-  }
+  "roles": [
+    {
+      "groupId": "8491812938cbda83918c",
+      "roleName": "GROUP_OWNER"
+    }
+  ]
 }
 ```
 
@@ -1961,17 +2091,19 @@ HTTP/1.1 200 OK
 ```
 ```json
 {
-  "id": "5196d3628d022db4cbc26d9e",
+  "id": "533dc19ce4b00835ff81e2eb",
   "username": "jane.doe@mongodb.com",
-  "password": "abc123",
-  "emailAddress": "somebody@somewhere-else.com",
-  "mobileNumber": "555-555-5555",
+  "password": "M0ng0D8!:)",
+  "emailAddress": "jane.doe@mongodb.com",
+  "mobileNumber": "2125551234",
   "firstName": "Jane",
   "lastName": "Doe",
-  "roles": {
-    "groupId": "533daa30879bb2da07807696",
-    "roleName": "GROUP_USER_ADMIN"
-  }
+  "roles": [
+    {
+      "groupId": "8491812938cbda83918c",
+      "roleName": "GROUP_OWNER"
+    }
+  ]
 }
 ```
 
@@ -1994,21 +2126,26 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/users
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "5196d3628d022db4cbc26d9e",
-    "username": "jane.doe@mongodb.com",
-    "password": "abc123",
-    "emailAddress": "somebody@somewhere-else.com",
-    "mobileNumber": "555-555-5555",
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "roles": {
-      "groupId": "533daa30879bb2da07807696",
-      "roleName": "GROUP_USER_ADMIN"
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "id": "533dc19ce4b00835ff81e2eb",
+      "username": "jane.doe@mongodb.com",
+      "password": "M0ng0D8!:)",
+      "emailAddress": "jane.doe@mongodb.com",
+      "mobileNumber": "2125551234",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "roles": [
+        {
+          "groupId": "8491812938cbda83918c",
+          "roleName": "GROUP_OWNER"
+        }
+      ]
     }
-  }
-]
+  ]
+}
 ```
 
 ### User Delete
@@ -2030,21 +2167,21 @@ $ curl -n -X DELETE https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/use
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "id": "5196d3628d022db4cbc26d9e",
-    "username": "jane.doe@mongodb.com",
-    "password": "abc123",
-    "emailAddress": "somebody@somewhere-else.com",
-    "mobileNumber": "555-555-5555",
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "roles": {
-      "groupId": "533daa30879bb2da07807696",
-      "roleName": "GROUP_USER_ADMIN"
+{
+  "id": "533dc19ce4b00835ff81e2eb",
+  "username": "jane.doe@mongodb.com",
+  "password": "M0ng0D8!:)",
+  "emailAddress": "jane.doe@mongodb.com",
+  "mobileNumber": "2125551234",
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "roles": [
+    {
+      "groupId": "8491812938cbda83918c",
+      "roleName": "GROUP_OWNER"
     }
-  }
-]
+  ]
+}
 ```
 
 ### User Update
@@ -2058,6 +2195,8 @@ PATCH /users/{user_id}
 #### Curl Example
 ```term
 $ curl -n -X PATCH https://mms.mongodb.com/api/public/v1.0/users/$USER_ID
+-H "Content-Type: application/json" \
+-d '{"id":"533dc19ce4b00835ff81e2eb","username":"jane.doe@mongodb.com","password":"M0ng0D8!:)","emailAddress":"jane.doe@mongodb.com","mobileNumber":"2125551234","firstName":"Jane","lastName":"Doe","roles":[{"groupId":"8491812938cbda83918c","roleName":"GROUP_OWNER"}]}'
 ```
 
 
@@ -2067,17 +2206,19 @@ HTTP/1.1 200 OK
 ```
 ```json
 {
-  "id": "5196d3628d022db4cbc26d9e",
+  "id": "533dc19ce4b00835ff81e2eb",
   "username": "jane.doe@mongodb.com",
-  "password": "abc123",
-  "emailAddress": "somebody@somewhere-else.com",
-  "mobileNumber": "555-555-5555",
+  "password": "M0ng0D8!:)",
+  "emailAddress": "jane.doe@mongodb.com",
+  "mobileNumber": "2125551234",
   "firstName": "Jane",
   "lastName": "Doe",
-  "roles": {
-    "groupId": "533daa30879bb2da07807696",
-    "roleName": "GROUP_USER_ADMIN"
-  }
+  "roles": [
+    {
+      "groupId": "8491812938cbda83918c",
+      "roleName": "GROUP_OWNER"
+    }
+  ]
 }
 ```
 

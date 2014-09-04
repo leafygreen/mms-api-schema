@@ -4,11 +4,14 @@
     "alert": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Alert",
+      "description": "Working with MMS Alerts",
+      "type": [
+        "object"
+      ],
       "definitions": {
         "id": {
           "description": "Unique identifier",
           "example": "5196d3628d022db4cbc26d9e",
-          "format": "uuid",
           "type": [
             "string"
           ]
@@ -16,20 +19,26 @@
         "groupId": {
           "description": "ID of the group that this alert was opened for.",
           "example": "5196d3628d022db4cbc26d9e",
-          "format": "uuid",
           "type": [
             "string"
           ]
         },
         "typeName": {
-          "description": "The type of alert. Possible values are: AGENT BACKUP HOST HOST_METRIC REPLICA_SET",
+          "description": "The type of alert.",
           "example": "AGENT",
           "type": [
             "string"
+          ],
+          "enum": [
+            "AGENT",
+            "BACKUP",
+            "HOST",
+            "HOST_METRIC",
+            "REPLICA_SET"
           ]
         },
         "eventTypeName": {
-          "description": "The name of the event that triggered the alert.",
+          "description": "The name of the event that triggered the alert. The possible values here depend on the typeName.",
           "example": "MONITORING_AGENT_DOWN",
           "type": [
             "string"
@@ -40,12 +49,30 @@
           "example": "OPEN",
           "type": [
             "string"
+          ],
+          "enum": [
+            "OPEN",
+            "CLOSED"
           ]
         },
         "acknowledgedUntil": {
           "description": "The date through which the alert has been acknowledged. Will not be present if the alert has never been acknowledged.",
           "example": "2014-03-01T12:00:00Z",
           "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "acknowledgementComment": {
+          "description": "The comment left by the user who acknowledged the alert. Will not be present if the alert has never been acknowledged.",
+          "example": "This is a comment string.",
+          "type": [
+            "string"
+          ]
+        },
+        "acknowledgingUsername": {
+          "description": "The username of the user who acknowledged the alert. Will not be present if the alert has never been acknowledged.",
+          "example": "jane.doe@mongodb.com",
           "type": [
             "string"
           ]
@@ -82,35 +109,33 @@
             "string"
           ]
         },
-        "metricName": {
-          "description": "The name of the metric whose value went outside the threshold. Only present for alerts of type HOST_METRIC",
-          "example": "ASSERT_REGULAR",
+        "currentValue": {
           "type": [
-            "string"
-          ]
-        },
-        "currentValue-number": {
-          "description": "The value of the metric.",
-          "example": "100.0",
-          "type": [
-            "number"
-          ]
-        },
-        "currentValue-units": {
-          "description": "The units for the value. Depends on the type of metric. For example, a metric that measures memory consumption would have a byte measurement, while a metric that measures time would have a time unit. Possible values are: BITS KILOBITS MEGABITS GIGABITS BYTES KILOBYTES MEGABYTES GIGABYTES TERABYTES PETABYTES MILLISECONDS SECONDS MINUTES HOURS DAYS RAW",
-          "example": "BITS",
-          "type": [
-            "string"
-          ]
+            "object"
+          ],
+          "properties": {
+            "number": {
+              "description": "The value of the metric.",
+              "example": 100.0,
+              "type": [
+                "number"
+              ]
+            },
+            "units": {
+              "$ref": "#/definitions/metric/definitions/units"
+            }
+          }
         }
       },
-      "description": "Working with MMS Alerts",
       "links": [
         {
           "description": "Info for existing alert.",
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/alerts/{(%23%2Fdefinitions%2Falert%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
+          "targetSchema": {
+            "$ref": "#/definitions/alert"
+          },
           "title": "Info"
         },
         {
@@ -118,6 +143,27 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/alerts",
           "method": "GET",
           "rel": "instances",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/alert"
+                }
+              }
+            }
+          },
           "title": "List"
         },
         {
@@ -125,6 +171,27 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/alertConfigs/{(%23%2Fdefinitions%2FalertConfig%2Fdefinitions%2Fid)}/alerts",
           "method": "GET",
           "rel": "instances",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/alert"
+                }
+              }
+            }
+          },
           "title": "List"
         },
         {
@@ -133,11 +200,10 @@
           "method": "PATCH",
           "rel": "update",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/alert"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/alert"
           },
           "title": "Update"
         }
@@ -174,36 +240,24 @@
           "$ref": "#/definitions/alert/definitions/lastNotified"
         },
         "metricName": {
-          "$ref": "#/definitions/alert/definitions/metricName"
+          "$ref": "#/definitions/metric/definitions/metricName"
         },
         "currentValue": {
-          "description": "The current value of the metric that triggered the alert. Only present for alerts of type HOST_METRIC.",
-          "properties": {
-            "number": {
-              "$ref": "#/definitions/alert/definitions/currentValue-number"
-            },
-            "units": {
-              "$ref": "#/definitions/alert/definitions/currentValue-units"
-            }
-          },
-          "strictProperties": true,
-          "type": [
-            "object"
-          ]
+          "$ref": "#/definitions/alert/definitions/currentValue"
         }
-      },
-      "type": [
-        "object"
-      ]
+      }
     },
     "alertConfig": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "AlertConfig",
+      "description": "Working with MMS Alert Configurations",
+      "type": [
+        "object"
+      ],
       "definitions": {
         "id": {
           "description": "Unique identifier.",
           "example": "533dc40ae4b00835ff81eaee",
-          "format": "uuid",
           "type": [
             "string"
           ]
@@ -211,21 +265,6 @@
         "groupId": {
           "description": "ID of the group that owns this alert configuration.",
           "example": "5196d3628d022db4cbc26d9e",
-          "format": "uuid",
-          "type": [
-            "string"
-          ]
-        },
-        "typeName": {
-          "description": "The type of this alert configuration. Supports the same values as the typeName field of the alerts resource.",
-          "example": "HOST_METRIC",
-          "type": [
-            "string"
-          ]
-        },
-        "eventTypeName": {
-          "description": "The type of event that will trigger an alert. Supports the same values as the eventTypeName field of the alerts resource.",
-          "example": "OUTSIDE_METRIC_THRESHOLD",
           "type": [
             "string"
           ]
@@ -248,153 +287,193 @@
         },
         "enabled": {
           "description": "Is this alert configuration enabled?",
-          "example": "true",
+          "example": true,
           "type": [
             "boolean"
           ]
         },
-        "matchers-fieldName": {
-          "description": "The name of the field in the target object to match on. The available fields depend on the typeName:",
-          "example": "hostnameAndPort",
+        "matcher": {
+          "description": "Rules to apply when matching an object against this alert configuration. Only entities that match all these rules will be checked for an alert condition.",
           "type": [
-            "string"
-          ]
+            "object"
+          ],
+          "properties": {
+            "fieldName": {
+              "description": "The name of the field in the target object to match on. The available fields depend on the typeName.",
+              "example": "hostnameAndPort",
+              "type": [
+                "string"
+              ]
+            },
+            "operator": {
+              "description": "The operator to test the field's value.",
+              "example": "EQUALS",
+              "type": [
+                "string"
+              ],
+              "enum": [
+                "EQUALS",
+                "NOT_EQUALS",
+                "CONTAINS",
+                "NOT_CONTAINS",
+                "STARTS_WITH",
+                "ENDS_WITH",
+                "REGEX"
+              ]
+            },
+            "value": {
+              "description": "The value to test with the specified operator. When matching on the TYPE_NAME field for a HOST or HOST_METRIC alert, the possible typeName values are: PRIMARY SECONDARY STANDALONE CONFIG MONGOS",
+              "example": "mongo.babypearfoo.com:27017",
+              "type": [
+                "string"
+              ]
+            }
+          }
         },
-        "matchers-operator": {
-          "description": "The operator to test the field's value. Possible values are: EQUALS NOT_EQUALS CONTAINS NOT_CONTAINS STARTS_WITH ENDS_WITH REGEX",
-          "example": "EQUALS",
+        "notification": {
+          "description": "Notifications to send when an alert condition is detected.",
           "type": [
-            "string"
-          ]
+            "object"
+          ],
+          "properties": {
+            "typeName": {
+              "description": "The type of alert notification. Note that SNMP notifications are not available in the cloud version of MMS. This feature is only available to On Premise installations.",
+              "example": "SMS",
+              "type": [
+                "string"
+              ],
+              "enum": [
+                "GROUP",
+                "USER",
+                "SMS",
+                "EMAIL",
+                "PAGER_DUTY",
+                "HIPCHAT",
+                "SNMP"
+              ]
+            },
+            "delayMin": {
+              "description": "The number of minutes to wait after an alert condition is detected before sending out the first notification.",
+              "example": 5,
+              "type": [
+                "integer"
+              ]
+            },
+            "intervalMin": {
+              "description": "The number of minutes to wait between succcessive notifications for unacknowledged alerts that are not resolved.",
+              "example": 0,
+              "type": [
+                "integer"
+              ]
+            },
+            "emailAddress": {
+              "description": "The email address to which to send notification. Only present for notifications of type EMAIL.",
+              "example": "jane.doe@gmail.com",
+              "type": [
+                "string"
+              ]
+            },
+            "notificationToken": {
+              "description": "A HipChat API token. Only present for notifications of type HIP_CHAT.",
+              "example": "123456abcdef",
+              "type": [
+                "string"
+              ]
+            },
+            "roomName": {
+              "description": "HipChat room name. Only present for notifications of type HIP_CHAT.",
+              "example": "Test Chat Room",
+              "type": [
+                "string"
+              ]
+            },
+            "emailEnabled": {
+              "description": "Should email notifications be sent? Only present for notifications of type GROUP and USER.",
+              "example": true,
+              "type": [
+                "boolean"
+              ]
+            },
+            "smsEnabled": {
+              "description": "Should SMS notifications be sent? Only present for notifications of type GROUP and USER.",
+              "example": true,
+              "type": [
+                "boolean"
+              ]
+            },
+            "username": {
+              "description": "The name of an MMS user to which to send notifications. Only a user in the group that owns the alert configuration is allowed here.",
+              "example": "jane.doe@gmail.com",
+              "type": [
+                "string"
+              ]
+            },
+            "mobileNumber": {
+              "description": "Mobile number to send SMS messages to. Only present for notifications of type SMS.",
+              "example": "(212) 212-1212",
+              "type": [
+                "string"
+              ]
+            },
+            "snmpAddress": {
+              "description": "Hostname and port to send SNMP traps to. Note that SNMP is only supported for On Premise MMS; also, at this time MMS is only able to send SNMP traps to the standard SNMP port (161).",
+              "example": "somedomain.com:161",
+              "type": [
+                "string"
+              ]
+            },
+            "serviceKey": {
+              "description": "PagerDuty service key.",
+              "example": "123456abcdef",
+              "type": [
+                "string"
+              ]
+            }
+          }
         },
-        "matchers-value": {
-          "description": "The value to test with the specified operator. When matching on the TYPE_NAME field for a HOST or HOST_METRIC alert, the possible typeName values are: PRIMARY SECONDARY STANDALONE CONFIG MONGOS",
-          "example": "mongo.babypearfoo.com:27017",
+        "metricThreshold": {
           "type": [
-            "string"
-          ]
-        },
-        "notifications-typeName": {
-          "description": "The type of alert notification. Possible values are: GROUP USER SMS EMAIL PAGER_DUTY HIPCHAT SNMP. Note that SNMP notifications are not available in the cloud version of MMS. This feature is only available to On Premise installations.",
-          "example": "SMS",
-          "type": [
-            "string"
-          ]
-        },
-        "notifications-delayMin": {
-          "description": "The number of minutes to wait after an alert condition is detected before sending out the first notification.",
-          "example": "5",
-          "type": [
-            "integer"
-          ]
-        },
-        "notifications-intervalMin": {
-          "description": "The number of minutes to wait between succcessive notifications for unacknowledged alerts that are not resolved.",
-          "example": "0",
-          "type": [
-            "integer"
-          ]
-        },
-        "notifications-emailAddress": {
-          "description": "The email address to which to send notification. Only present for notifications of type EMAIL.",
-          "example": "jane.doe@gmail.com",
-          "type": [
-            "string"
-          ]
-        },
-        "notifications-notificationToken": {
-          "description": "A HipChat API token. Only present for notifications of type HIP_CHAT.",
-          "example": "123456abcdef",
-          "type": [
-            "string"
-          ]
-        },
-        "notifications-roomName": {
-          "description": "HipChat room name. Only present for notifications of type HIP_CHAT.",
-          "example": "Test Chat Room",
-          "type": [
-            "string"
-          ]
-        },
-        "notifications-emailEnabled": {
-          "description": "Should email notifications be sent? Only present for notifications of type GROUP and USER.",
-          "example": "true",
-          "type": [
-            "boolean"
-          ]
-        },
-        "notifications-smsEnabled": {
-          "description": "Should SMS notifications be sent? Only present for notifications of type GROUP and USER.",
-          "example": "true",
-          "type": [
-            "boolean"
-          ]
-        },
-        "notifications-username": {
-          "description": "The name of an MMS user to which to send notifications. Only a user in the group that owns the alert configuration is allowed here.",
-          "example": "jane.doe@gmail.com",
-          "type": [
-            "string"
-          ]
-        },
-        "notifications-mobileNumber": {
-          "description": "Mobile number to send SMS messages to. Only present for notifications of type SMS.",
-          "example": "(212) 212-1212",
-          "type": [
-            "string"
-          ]
-        },
-        "notifications-snmpAddress": {
-          "description": "Hostname and port to send SNMP traps to. Note that SNMP is only supported for On Premise MMS; also, at this time MMS is only able to send SNMP traps to the standard SNMP port (161).",
-          "example": "somedomain.com:161",
-          "type": [
-            "string"
-          ]
-        },
-        "notifications-serviceKey": {
-          "description": "PagerDuty service key.",
-          "example": "123456abcdef",
-          "type": [
-            "string"
-          ]
-        },
-        "metricThreshold-metricName": {
-          "description": "The name of the metric to check. Supports the same values as the metricName field of the alerts resource.",
-          "example": "MEMORY_RESIDENT",
-          "type": [
-            "string"
-          ]
-        },
-        "metricThreshold-operator": {
-          "description": "The operator to apply when checking the current metric value against the threshold value. Possible values are: GREATER_THAN LESS_THAN",
-          "example": "GREATER_THAN",
-          "type": [
-            "string"
-          ]
-        },
-        "metricThreshold-threshold": {
-          "description": "The threshold value outside of which an alert will be triggered.",
-          "example": "7",
-          "type": [
-            "integer"
-          ]
-        },
-        "metricThreshold-units": {
-          "description": "The units for the threshold value. Supports the same values as the currentValue.units field of the alerts resource.",
-          "example": "GIGABYTES",
-          "type": [
-            "string"
-          ]
-        },
-        "metricThreshold-mode": {
-          "description": "The mode to use when computing the current metric value. Possible values are: AVERAGE TOTAL",
-          "example": "TOTAL",
-          "type": [
-            "string"
-          ]
+            "object"
+          ],
+          "properties": {
+            "metricName": {
+              "$ref": "#/definitions/metric/definitions/metricName"
+            },
+            "operator": {
+              "description": "The operator to apply when checking the current metric value against the threshold value.",
+              "example": "GREATER_THAN",
+              "type": [
+                "string"
+              ],
+              "enum": [
+                "GREATER_THAN",
+                "LESS_THAN"
+              ]
+            },
+            "threshold": {
+              "description": "The threshold value outside of which an alert will be triggered.",
+              "example": 7,
+              "type": [
+                "integer"
+              ]
+            },
+            "units": {
+              "$ref": "#/definitions/metric/definitions/units"
+            },
+            "mode": {
+              "description": "The mode to use when computing the current metric value.",
+              "example": "TOTAL",
+              "type": [
+                "string"
+              ],
+              "enum": [
+                "AVERAGE",
+                "TOTAL"
+              ]
+            }
+          }
         }
       },
-      "description": "Working with MMS Alert Configurations",
       "links": [
         {
           "description": "Create a new alertConfig.",
@@ -402,11 +481,10 @@
           "method": "POST",
           "rel": "create",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/alertConfig"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/alertConfig"
           },
           "title": "Create"
         },
@@ -422,6 +500,9 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/alertConfigs/{(%23%2Fdefinitions%2FalertConfig%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
+          "targetSchema": {
+            "$ref": "#/definitions/alertConfig"
+          },
           "title": "Info"
         },
         {
@@ -429,6 +510,27 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/alertConfigs",
           "method": "GET",
           "rel": "instances",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/alertConfig"
+                }
+              }
+            }
+          },
           "title": "List"
         },
         {
@@ -437,11 +539,10 @@
           "method": "PUT",
           "rel": "update",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/alertConfig"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/alertConfig"
           },
           "title": "Replace"
         },
@@ -451,11 +552,10 @@
           "method": "PATCH",
           "rel": "update",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/alertConfig"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/alertConfig"
           },
           "title": "Update"
         }
@@ -468,10 +568,10 @@
           "$ref": "#/definitions/alertConfig/definitions/groupId"
         },
         "typeName": {
-          "$ref": "#/definitions/alertConfig/definitions/typeName"
+          "$ref": "#/definitions/alert/definitions/typeName"
         },
         "eventTypeName": {
-          "$ref": "#/definitions/alertConfig/definitions/eventTypeName"
+          "$ref": "#/definitions/alert/definitions/eventTypeName"
         },
         "created": {
           "$ref": "#/definitions/alertConfig/definitions/created"
@@ -483,96 +583,25 @@
           "$ref": "#/definitions/alertConfig/definitions/enabled"
         },
         "matchers": {
-          "description": "The current value of the metric that triggered the alert. Only present for alerts of type HOST_METRIC.",
-          "properties": {
-            "fieldName": {
-              "$ref": "#/definitions/alertConfig/definitions/matchers-fieldName"
-            },
-            "operator": {
-              "$ref": "#/definitions/alertConfig/definitions/matchers-operator"
-            },
-            "value": {
-              "$ref": "#/definitions/alertConfig/definitions/matchers-value"
-            }
-          },
-          "strictProperties": true,
           "type": [
-            "object"
-          ]
+            "array"
+          ],
+          "items": {
+            "$ref": "#/definitions/alertConfig/definitions/matcher"
+          }
         },
         "notifications": {
-          "description": "Notifications to send when an alert condition is detected.",
-          "properties": {
-            "typeName": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-typeName"
-            },
-            "delayMin": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-delayMin"
-            },
-            "intervalMin": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-intervalMin"
-            },
-            "emailAddress": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-emailAddress"
-            },
-            "notificationToken": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-notificationToken"
-            },
-            "roomName": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-roomName"
-            },
-            "emailEnabled": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-emailEnabled"
-            },
-            "smsEnabled": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-smsEnabled"
-            },
-            "username": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-username"
-            },
-            "mobileNumber": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-mobileNumber"
-            },
-            "snmpAddress": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-snmpAddress"
-            },
-            "serviceKey": {
-              "$ref": "#/definitions/alertConfig/definitions/notifications-serviceKey"
-            }
-          },
-          "strictProperties": true,
           "type": [
-            "object"
-          ]
+            "array"
+          ],
+          "items": {
+            "$ref": "#/definitions/alertConfig/definitions/notification"
+          }
         },
         "metricThreshold": {
-          "description": "The threshold that will cause an alert to be triggered. Only present for alerts of the HOST_METRIC.",
-          "properties": {
-            "metricName": {
-              "$ref": "#/definitions/alertConfig/definitions/metricThreshold-metricName"
-            },
-            "operator": {
-              "$ref": "#/definitions/alertConfig/definitions/metricThreshold-operator"
-            },
-            "threshold": {
-              "$ref": "#/definitions/alertConfig/definitions/metricThreshold-threshold"
-            },
-            "units": {
-              "$ref": "#/definitions/alertConfig/definitions/metricThreshold-units"
-            },
-            "mode": {
-              "$ref": "#/definitions/alertConfig/definitions/metricThreshold-mode"
-            }
-          },
-          "strictProperties": true,
-          "type": [
-            "object"
-          ]
+          "$ref": "#/definitions/alertConfig/definitions/metricThreshold"
         }
-      },
-      "type": [
-        "object"
-      ]
+      }
     },
     "backupConfig": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
@@ -700,11 +729,14 @@
     "cluster": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Cluster",
+      "description": "Working with MMS Clusters",
+      "type": [
+        "object"
+      ],
       "definitions": {
         "id": {
           "description": "Unique identifier",
           "example": "5196d3628d022db4cbc26d9e",
-          "format": "uuid",
           "type": [
             "string"
           ]
@@ -712,16 +744,21 @@
         "groupId": {
           "description": "ID of the group that owns this cluster.",
           "example": "533d7d4730040be257defe88",
-          "format": "uuid",
           "type": [
             "string"
           ]
         },
         "typeName": {
-          "description": "Specifies what kind of cluster this is. Possible values are: MASTER_SLAVE REPLICA_SET SHARDED SHARDED_REPLICA_SET",
+          "description": "Specifies what kind of cluster this is.",
           "example": "REPLICA_SET",
           "type": [
             "string"
+          ],
+          "enum": [
+            "MASTER_SLAVE",
+            "REPLICA_SET",
+            "SHARDED",
+            "SHARDED_REPLICA_SET"
           ]
         },
         "clusterName": {
@@ -754,13 +791,15 @@
           ]
         }
       },
-      "description": "Working with MMS Clusters",
       "links": [
         {
           "description": "Info for existing cluster.",
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/clusters/{(%23%2Fdefinitions%2Fcluster%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
+          "targetSchema": {
+            "$ref": "#/definitions/cluster"
+          },
           "title": "Info"
         },
         {
@@ -768,6 +807,27 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/clusters",
           "method": "GET",
           "rel": "instances",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/cluster"
+                }
+              }
+            }
+          },
           "title": "List"
         },
         {
@@ -776,11 +836,10 @@
           "method": "PATCH",
           "rel": "update",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/cluster"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/cluster"
           },
           "title": "Update"
         }
@@ -807,19 +866,19 @@
         "lastHeartbeat": {
           "$ref": "#/definitions/cluster/definitions/lastHeartbeat"
         }
-      },
-      "type": [
-        "object"
-      ]
+      }
     },
     "group": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Group",
+      "description": "Working with MMS Groups",
+      "type": [
+        "object"
+      ],
       "definitions": {
         "id": {
           "description": "Unique identifier",
           "example": "5196d3628d022db4cbc26d9e",
-          "format": "uuid",
           "type": [
             "string"
           ]
@@ -830,6 +889,56 @@
           "type": [
             "string"
           ]
+        },
+        "hostsCounts": {
+          "description": "The total number of hosts by type. The embedded fields should be self-explanatory.",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "arbiter": {
+              "example": 1,
+              "type": [
+                "integer"
+              ]
+            },
+            "config": {
+              "example": 1,
+              "type": [
+                "integer"
+              ]
+            },
+            "primary": {
+              "example": 1,
+              "type": [
+                "integer"
+              ]
+            },
+            "secondary": {
+              "example": 1,
+              "type": [
+                "integer"
+              ]
+            },
+            "mongos": {
+              "example": 1,
+              "type": [
+                "integer"
+              ]
+            },
+            "master": {
+              "example": 1,
+              "type": [
+                "integer"
+              ]
+            },
+            "slave": {
+              "example": 1,
+              "type": [
+                "integer"
+              ]
+            }
+          }
         },
         "lastActiveAgent": {
           "description": "Date that a ping was last received from one of the group's monitoring agents.",
@@ -860,64 +969,14 @@
             "integer"
           ]
         },
-        "arbiter": {
-          "description": "Number of arbiters in hostsCounts",
-          "example": "1",
-          "type": [
-            "integer"
-          ]
-        },
-        "config": {
-          "description": "Number of configs in hostsCounts",
-          "example": "1",
-          "type": [
-            "integer"
-          ]
-        },
-        "primary": {
-          "description": "Number of primaries in hostsCounts",
-          "example": "1",
-          "type": [
-            "integer"
-          ]
-        },
-        "secondary": {
-          "description": "Number of secondaries in hostsCounts",
-          "example": "1",
-          "type": [
-            "integer"
-          ]
-        },
-        "mongos": {
-          "description": "Number of mongoss in hostsCounts",
-          "example": "1",
-          "type": [
-            "integer"
-          ]
-        },
-        "master": {
-          "description": "Number of masters in hostsCounts",
-          "example": "1",
-          "type": [
-            "integer"
-          ]
-        },
-        "slave": {
-          "description": "Number of slaves in hostsCounts",
-          "example": "1",
-          "type": [
-            "integer"
-          ]
-        },
         "publicApiEnabled": {
           "description": "Is the Public API enabled for this group? This is a read-only field that will always be true for groups created with the API. Note that for groups created in the MMS UI, the only way to set this flag to true is by enabling the Public API for the group in the Settings tab.",
-          "example": "true",
+          "example": true,
           "type": [
             "boolean"
           ]
         }
       },
-      "description": "Working with MMS Groups",
       "links": [
         {
           "description": "Create a new group.",
@@ -925,11 +984,10 @@
           "method": "POST",
           "rel": "create",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/group"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/group"
           },
           "title": "Create"
         },
@@ -945,6 +1003,9 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
+          "targetSchema": {
+            "$ref": "#/definitions/group"
+          },
           "title": "Info"
         },
         {
@@ -952,6 +1013,27 @@
           "href": "/groups",
           "method": "GET",
           "rel": "instances",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/group"
+                }
+              }
+            }
+          },
           "title": "List"
         }
       ],
@@ -963,34 +1045,7 @@
           "$ref": "#/definitions/group/definitions/name"
         },
         "hostsCounts": {
-          "description": "The total number of hosts by type. The embedded fields should be self-explanatory.",
-          "properties": {
-            "arbiter": {
-              "$ref": "#/definitions/group/definitions/arbiter"
-            },
-            "config": {
-              "$ref": "#/definitions/group/definitions/config"
-            },
-            "primary": {
-              "$ref": "#/definitions/group/definitions/primary"
-            },
-            "secondary": {
-              "$ref": "#/definitions/group/definitions/secondary"
-            },
-            "mongos": {
-              "$ref": "#/definitions/group/definitions/mongos"
-            },
-            "master": {
-              "$ref": "#/definitions/group/definitions/master"
-            },
-            "slave": {
-              "$ref": "#/definitions/group/definitions/slave"
-            }
-          },
-          "strictProperties": true,
-          "type": [
-            "object"
-          ]
+          "$ref": "#/definitions/group/definitions/hostsCounts"
         },
         "lastActiveAgent": {
           "$ref": "#/definitions/group/definitions/lastActiveAgent"
@@ -1007,19 +1062,19 @@
         "publicApiEnabled": {
           "$ref": "#/definitions/group/definitions/publicApiEnabled"
         }
-      },
-      "type": [
-        "object"
-      ]
+      }
     },
     "host": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Host",
+      "description": "Working with MMS Hosts",
+      "type": [
+        "object"
+      ],
       "definitions": {
         "id": {
           "description": "Unique identifier",
           "example": "4059580c20c4581872ef24d0b8f5dca0",
-          "format": "uuid",
           "type": [
             "string"
           ]
@@ -1027,7 +1082,6 @@
         "groupId": {
           "description": "ID of the group that owns this host.",
           "example": "5196d3628d022db4cbc26d9e",
-          "format": "uuid",
           "type": [
             "string"
           ]
@@ -1041,16 +1095,30 @@
         },
         "port": {
           "description": "Port that MongoDB process (mongod or mongos) listens on.",
-          "example": "27017",
+          "example": 27017,
           "type": [
             "integer"
           ]
         },
         "typeName": {
-          "description": "Type for this host. Possible values are: STANDALONE REPLICA_PRIMARY REPLICA_SECONDARY REPLICA_ARBITER RECOVERING MASTER SLAVE SHARD_MONGOS SHARD_CONFIG SHARD_STANDALONE SHARD_PRIMARY SHARD_SECONDARY",
+          "description": "Type for this host.",
           "example": "STANDALONE",
           "type": [
             "string"
+          ],
+          "enum": [
+            "STANDALONE",
+            "REPLICA_PRIMARY",
+            "REPLICA_SECONDARY",
+            "REPLICA_ARBITER",
+            "RECOVERING",
+            "MASTER",
+            "SLAVE",
+            "SHARD_MONGOS",
+            "SHARD_CONFIG",
+            "SHARD_STANDALONE",
+            "SHARD_PRIMARY",
+            "SHARD_SECONDARY"
           ]
         },
         "lastPing": {
@@ -1077,28 +1145,28 @@
         },
         "deactivated": {
           "description": "Has this host been deactivated by MMS? A host will be marked as deactivated when MMS hasn't received a ping from it in several days.",
-          "example": "false",
+          "example": false,
           "type": [
             "boolean"
           ]
         },
         "hasStartupWarnings": {
           "description": "Are there startup warnings for this host?",
-          "example": "false",
+          "example": false,
           "type": [
             "boolean"
           ]
         },
         "sslEnabled": {
           "description": "Is SSL enabled for this host?",
-          "example": "false",
+          "example": false,
           "type": [
             "boolean"
           ]
         },
         "logsEnabled": {
           "description": "Is MMS collecting logs for this host?",
-          "example": "false",
+          "example": false,
           "type": [
             "boolean"
           ]
@@ -1113,9 +1181,9 @@
         },
         "uptimeMsec": {
           "description": "Number of milliseconds since this host's last restart.",
-          "example": "1024",
+          "example": 1024,
           "type": [
-            "number"
+            "integer"
           ]
         },
         "lastRestart": {
@@ -1141,10 +1209,23 @@
           ]
         },
         "replicaStateName": {
-          "description": "Current state of this host within a replica set. Only present if this host is part of a replica set. See Replica Set Member States for possible values.",
+          "description": "Current state of this host within a replica set. Only present if this host is part of a replica set.",
           "example": "SECONDARY",
           "type": [
             "string"
+          ],
+          "enum": [
+            "STARTUP",
+            "PRIMARY",
+            "SECONDARY",
+            "RECOVERING",
+            "FATAL",
+            "STARTUP2",
+            "UNKNOWN",
+            "ARBITER",
+            "DOWN",
+            "ROLLBACK",
+            "REMOVED"
           ]
         },
         "created": {
@@ -1157,65 +1238,70 @@
         },
         "hostEnabled": {
           "description": "Is this host currently enabled? Hosts can be manually disabled in the MMS UI.",
-          "example": "true",
+          "example": true,
           "type": [
             "boolean"
           ]
         },
         "journalingEnabled": {
           "description": "Is journaling enabled for this host?",
-          "example": "true",
+          "example": true,
           "type": [
             "boolean"
           ]
         },
         "alertsEnabled": {
           "description": "Are alerts enabled for this host?",
-          "example": "true",
+          "example": true,
           "type": [
             "boolean"
           ]
         },
         "muninEnabled": {
           "description": "Are Munin stats being collected for this host?",
-          "example": "true",
+          "example": true,
           "type": [
             "boolean"
           ]
         },
         "hidden": {
           "description": "Is this host currently hidden? When MMS deactivates a host, it will also mark it as hidden.",
-          "example": "false",
+          "example": false,
           "type": [
             "boolean"
           ]
         },
         "profilerEnabled": {
           "description": "Is MMS collecting profile information from this host?",
-          "example": "true",
+          "example": true,
           "type": [
             "boolean"
           ]
         },
         "lowUlimit": {
           "description": "Does this host have a low ulimit setting?",
-          "example": "false",
+          "example": false,
           "type": [
             "boolean"
           ]
         },
         "muninPort": {
           "description": "What port should be used to collect Munin stats from this host?",
-          "example": "4949",
+          "example": 4949,
           "type": [
             "integer"
           ]
         },
         "authMechanismName": {
-          "description": "The authentication mechanism used to connect to this host. Possible values are: MONGODB_CR GSSAPI NONE",
+          "description": "The authentication mechanism used to connect to this host.",
           "example": "MONGODB_CR",
           "type": [
             "string"
+          ],
+          "enum": [
+            "MONGODB_CR",
+            "GSSAPI",
+            "NONE"
           ]
         },
         "username": {
@@ -1233,7 +1319,6 @@
           ]
         }
       },
-      "description": "Working with MMS Hosts",
       "links": [
         {
           "description": "Create a new host.",
@@ -1241,11 +1326,10 @@
           "method": "POST",
           "rel": "create",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/host"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/host"
           },
           "title": "Create"
         },
@@ -1261,6 +1345,9 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/hosts/{(%23%2Fdefinitions%2Fhost%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
+          "targetSchema": {
+            "$ref": "#/definitions/host"
+          },
           "title": "Info"
         },
         {
@@ -1268,6 +1355,27 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/hosts",
           "method": "GET",
           "rel": "instances",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/host"
+                }
+              }
+            }
+          },
           "title": "List"
         },
         {
@@ -1276,13 +1384,70 @@
           "method": "PATCH",
           "rel": "update",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/host"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/host"
           },
           "title": "Update"
+        },
+        {
+          "description": "Available metrics for existing host.",
+          "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/hosts/{(%23%2Fdefinitions%2Fhost%2Fdefinitions%2Fid)}/metrics",
+          "method": "GET",
+          "rel": "metrics",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/metric"
+                }
+              }
+            }
+          },
+          "title": "Metrics"
+        },
+        {
+          "description": "Get the data points for the specified host and metric.",
+          "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/hosts/{(%23%2Fdefinitions%2Fhost%2Fdefinitions%2Fid)}/metrics/{(%23%2Fdefinitions%2Fmetric%2Fdefinitions%2FmetricName)}",
+          "method": "GET",
+          "rel": "hostMetric",
+          "targetSchema": {
+            "$ref": "#/definitions/metric"
+          },
+          "title": "Metric"
+        },
+        {
+          "description": "Get the data points for the specified host, db, and metric.",
+          "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/hosts/{(%23%2Fdefinitions%2Fhost%2Fdefinitions%2Fid)}/metrics/{(%23%2Fdefinitions%2Fmetric%2Fdefinitions%2FmetricName)}/{(%23%2Fdefinitions%2Fmetric%2Fdefinitions%2FdatabaseName)}",
+          "method": "GET",
+          "rel": "databaseMetric",
+          "targetSchema": {
+            "$ref": "#/definitions/metric"
+          },
+          "title": "Database Metric"
+        },
+        {
+          "description": "Get the data points for the specified host, device and metric.",
+          "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/hosts/{(%23%2Fdefinitions%2Fhost%2Fdefinitions%2Fid)}/metrics/{(%23%2Fdefinitions%2Fmetric%2Fdefinitions%2FmetricName)}/{(%23%2Fdefinitions%2Fmetric%2Fdefinitions%2FdeviceName)}",
+          "method": "GET",
+          "rel": "deviceMetric",
+          "targetSchema": {
+            "$ref": "#/definitions/metric"
+          },
+          "title": "Device Metric"
         }
       ],
       "properties": {
@@ -1370,10 +1535,213 @@
         "password": {
           "$ref": "#/definitions/host/definitions/password"
         }
-      },
+      }
+    },
+    "metric": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Metric",
+      "description": "Working with MMS Metrics",
       "type": [
         "object"
-      ]
+      ],
+      "definitions": {
+        "hostId": {
+          "description": "ID of the host to which this metric pertains.",
+          "example": "680ab316473d6b28f966364b947134fc",
+          "type": [
+            "string"
+          ]
+        },
+        "groupId": {
+          "description": "ID of the group that owns this host.",
+          "example": "2847387cd717dabc348a",
+          "type": [
+            "string"
+          ]
+        },
+        "metricName": {
+          "description": "The name of the metric.",
+          "example": "ASSERT_MSG",
+          "type": [
+            "string"
+          ],
+          "enum": [
+            "ASSERT_MSG",
+            "ASSERT_REGULAR",
+            "ASSERT_USER",
+            "ASSERT_WARNING",
+            "BACKGROUND_FLUSH_AVG",
+            "COMPUTED_MEMORY",
+            "CONNECTIONS",
+            "CONNECTIONS_MAX",
+            "CURSORS_TOTAL_CLIENT_CURSORS_SIZE",
+            "CURSORS_TOTAL_OPEN",
+            "CURSORS_TOTAL_TIMED_OUT",
+            "DB_DATA_SIZE_TOTAL",
+            "DB_LOCK_PERCENTAGE",
+            "DB_ACCESSES_NOT_IN_MEMORY",
+            "DB_PAGE_FAULT_EXCEPTIONS_THROWN",
+            "DB_STORAGE_TOTAL",
+            "EFFECTIVE_LOCK_PERCENTAGE",
+            "EXTRA_INFO_PAGE_FAULTS",
+            "GLOBAL_ACCESSES_NOT_IN_MEMORY",
+            "GLOBAL_LOCK_CURRENT_QUEUE_READERS",
+            "GLOBAL_LOCK_CURRENT_QUEUE_TOTAL",
+            "GLOBAL_LOCK_CURRENT_QUEUE_WRITERS",
+            "GLOBAL_PAGE_FAULT_EXCEPTIONS_THROWN",
+            "INDEX_COUNTERS_BTREE_ACCESSES",
+            "INDEX_COUNTERS_BTREE_HITS",
+            "INDEX_COUNTERS_BTREE_MISSES",
+            "INDEX_COUNTERS_BTREE_MISS_RATIO",
+            "JOURNALING_COMMITS_IN_WRITE_LOCK",
+            "JOURNALING_MB",
+            "JOURNALING_WRITE_DATA_FILES_MB",
+            "MEMORY_MAPPED",
+            "MEMORY_RESIDENT",
+            "MEMORY_VIRTUAL",
+            "MUNIN_CPU_IOWAIT",
+            "MUNIN_CPU_IRQ",
+            "MUNIN_CPU_NICE",
+            "MUNIN_CPU_SOFTIRQ",
+            "MUNIN_CPU_STEAL",
+            "MUNIN_CPU_SYSTEM",
+            "MUNIN_CPU_USER",
+            "MUNIN_IOSTAT_OP_READ",
+            "MUNIN_IOSTAT_OP_WRITE",
+            "MUNIN_IOSTAT_TIME_READ",
+            "MUNIN_IOSTAT_TIME_WRITE",
+            "NETWORK_BYTES_IN",
+            "NETWORK_BYTES_OUT",
+            "NETWORK_NUM_REQUESTS",
+            "OPCOUNTER_CMD",
+            "OPCOUNTER_DELETE",
+            "OPCOUNTER_GETMORE",
+            "OPCOUNTER_INSERT",
+            "OPCOUNTER_QUERY",
+            "OPCOUNTER_REPL_CMD",
+            "OPCOUNTER_REPL_DELETE",
+            "OPCOUNTER_REPL_INSERT",
+            "OPCOUNTER_REPL_UPDATE",
+            "OPCOUNTER_UPDATE",
+            "OPLOG_MASTER_LAG_TIME_DIFF",
+            "OPLOG_MASTER_TIME",
+            "OPLOG_RATE_GB_PER_HOUR",
+            "OPLOG_SLAVE_LAG_MASTER_TIME"
+          ]
+        },
+        "units": {
+          "description": "The units in which the metric values are expressed.",
+          "example": "BYTES",
+          "type": [
+            "string"
+          ],
+          "enum": [
+            "RAW",
+            "BITS",
+            "KILOBITS",
+            "MEGABITS",
+            "GIGABITS",
+            "BYTES",
+            "KILOBYTES",
+            "MEGABYTES",
+            "GIGABYTES",
+            "TERABYTES",
+            "PETABYTES",
+            "MILLISECONDS",
+            "SECONDS",
+            "MINUTES",
+            "HOURS",
+            "DAYS"
+          ]
+        },
+        "granularity": {
+          "description": "The size of the epoch covered by each data point.",
+          "example": "MINUTE",
+          "type": [
+            "string"
+          ],
+          "enum": [
+            "MINUTE",
+            "HOUR",
+            "DAY"
+          ]
+        },
+        "period": {
+          "description": "The ISO-8601 formatted time period that specifies how far back in the past to query.",
+          "example": "P1DT12H",
+          "type": [
+            "string"
+          ]
+        },
+        "deviceName": {
+          "description": "The name of the device. Only present for hardware (ie, Munin) metrics.",
+          "example": "xxx",
+          "type": [
+            "string"
+          ]
+        },
+        "databaseName": {
+          "description": "The name of the database. Only present for database-level metrics.",
+          "example": "mydb",
+          "type": [
+            "string"
+          ]
+        },
+        "dataPoints": {
+          "description": "An array of objects, where each object represents a single metric data point. When there is no data point available for a particular epoch, then it will simply be missing from the array. For example, if you request minute-level data points for 1:30PM through 2:00PM, but MMS does not have a 1:31PM sample, then: dataPoints[0].timestamp = ‘...T13:30:00Z’; dataPoints[1].timestamp = ‘...T13:32:00Z’; dataPoints[2].timestamp = ‘...T13:33:00Z’; etc.",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "timestamp": {
+                "description": "The timestamp of the beginning of the epoch represented by this data point.",
+                "example": "2014-08-29T14:00:00Z",
+                "format": "date-time",
+                "type": [
+                  "string"
+                ]
+              },
+              "value": {
+                "description": "The value of the data point.",
+                "example": 381.2,
+                "type": [
+                  "number"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "properties": {
+        "hostId": {
+          "$ref": "#/definitions/metric/definitions/hostId"
+        },
+        "groupId": {
+          "$ref": "#/definitions/metric/definitions/groupId"
+        },
+        "metricName": {
+          "$ref": "#/definitions/metric/definitions/metricName"
+        },
+        "units": {
+          "$ref": "#/definitions/metric/definitions/units"
+        },
+        "granularity": {
+          "$ref": "#/definitions/metric/definitions/granularity"
+        },
+        "deviceName": {
+          "$ref": "#/definitions/metric/definitions/deviceName"
+        },
+        "databaseName": {
+          "$ref": "#/definitions/metric/definitions/databaseName"
+        },
+        "dataPoints": {
+          "$ref": "#/definitions/metric/definitions/dataPoints"
+        }
+      }
     },
     "root": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
@@ -1385,11 +1753,11 @@
       "definitions": {
         "throttling": {
           "description": "Tells whether or not MMS is throttling data. This can be used as a simple indicator of the current health of MMS, since throttling is generally enabled when MMS is in an unhealthy state.",
-          "readOnly": true,
-          "example": "false",
+          "example": false,
           "type": [
             "boolean"
-          ]
+          ],
+          "readOnly": true
         }
       },
       "links": [
@@ -1413,11 +1781,14 @@
     "user": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "User",
+      "description": "Working with MMS Users",
+      "type": [
+        "object"
+      ],
       "definitions": {
         "id": {
           "description": "Unique identifier",
-          "example": "5196d3628d022db4cbc26d9e",
-          "format": "uuid",
+          "example": "533dc19ce4b00835ff81e2eb",
           "type": [
             "string"
           ]
@@ -1431,21 +1802,21 @@
         },
         "password": {
           "description": "Password. This field is NOT included in the entity returned from the server. It can only be sent in the entity body when creating a new user.",
-          "example": "abc123",
+          "example": "M0ng0D8!:)",
           "type": [
             "string"
           ]
         },
         "emailAddress": {
           "description": "Email address",
-          "example": "somebody@somewhere-else.com",
+          "example": "jane.doe@mongodb.com",
           "type": [
             "string"
           ]
         },
         "mobileNumber": {
           "description": "Mobile number. This field can only be set or edited using the MMS UI because it is tied to two factor authentication",
-          "example": "555-555-5555",
+          "example": "2125551234",
           "type": [
             "string"
           ]
@@ -1464,22 +1835,48 @@
             "string"
           ]
         },
-        "groupId": {
-          "description": "The groupId in which the user has the specified role. Note that for the 'global' roles (those whose name starts with GLOBAL_) there is no groupId since these roles are not tied to a group.",
-          "example": "533daa30879bb2da07807696",
+        "roles": {
+          "description": "Role assignments",
           "type": [
-            "string"
-          ]
-        },
-        "roleName": {
-          "description": "The name of the role. Possible values are: GLOBAL_AUTOMATION_ADMIN GLOBAL_BACKUP_ADMIN GLOBAL_MONITORING_ADMIN GLOBAL_OWNER GLOBAL_READ_ONLY GLOBAL_USER_ADMIN GROUP_AUTOMATION_ADMIN GROUP_BACKUP_ADMIN GROUP_MONITORING_ADMIN GROUP_OWNER GROUP_READ_ONLY GROUP_USER_ADMIN",
-          "example": "GROUP_USER_ADMIN",
-          "type": [
-            "string"
-          ]
+            "array"
+          ],
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "groupId": {
+                "description": "The groupId in which the user has the specified role. Note that for the “global” roles (those whose name starts with GLOBAL_) there is no groupId since these roles are not tied to a group.",
+                "example": "8491812938cbda83918c",
+                "type": [
+                  "string"
+                ]
+              },
+              "roleName": {
+                "description": "The name of the role.",
+                "example": "GROUP_OWNER",
+                "type": [
+                  "string"
+                ],
+                "enum": [
+                  "GLOBAL_AUTOMATION_ADMIN",
+                  "GLOBAL_BACKUP_ADMIN",
+                  "GLOBAL_MONITORING_ADMIN",
+                  "GLOBAL_OWNER",
+                  "GLOBAL_READ_ONLY",
+                  "GLOBAL_USER_ADMIN",
+                  "GROUP_AUTOMATION_ADMIN",
+                  "GROUP_BACKUP_ADMIN",
+                  "GROUP_MONITORING_ADMIN",
+                  "GROUP_OWNER",
+                  "GROUP_READ_ONLY",
+                  "GROUP_USER_ADMIN"
+                ]
+              }
+            }
+          }
         }
       },
-      "description": "Working with MMS Users",
       "links": [
         {
           "description": "Create a new user.",
@@ -1487,11 +1884,10 @@
           "method": "POST",
           "rel": "create",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/user"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/user"
           },
           "title": "Create"
         },
@@ -1501,11 +1897,10 @@
           "method": "POST",
           "rel": "create",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "array"
-            ]
+            "$ref": "#/definitions/user"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/user"
           },
           "title": "Add"
         },
@@ -1514,6 +1909,9 @@
           "href": "/users/{(%23%2Fdefinitions%2Fuser%2Fdefinitions%2Fid)}",
           "method": "GET",
           "rel": "self",
+          "targetSchema": {
+            "$ref": "#/definitions/user"
+          },
           "title": "Info"
         },
         {
@@ -1521,13 +1919,34 @@
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/users",
           "method": "GET",
           "rel": "instances",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "totalCount": {
+                "example": 1,
+                "type": [
+                  "integer"
+                ]
+              },
+              "results": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "$ref": "#/definitions/user"
+                }
+              }
+            }
+          },
           "title": "List"
         },
         {
           "description": "Delete an existing user.",
           "href": "/groups/{(%23%2Fdefinitions%2Fgroup%2Fdefinitions%2Fid)}/users/{(%23%2Fdefinitions%2Fuser%2Fdefinitions%2Fid)}",
           "method": "DELETE",
-          "rel": "instances",
+          "rel": "destroy",
           "title": "Delete"
         },
         {
@@ -1536,11 +1955,10 @@
           "method": "PATCH",
           "rel": "update",
           "schema": {
-            "properties": {
-            },
-            "type": [
-              "object"
-            ]
+            "$ref": "#/definitions/user"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/user"
           },
           "title": "Update"
         }
@@ -1568,24 +1986,9 @@
           "$ref": "#/definitions/user/definitions/lastName"
         },
         "roles": {
-          "description": "Role assignments",
-          "properties": {
-            "groupId": {
-              "$ref": "#/definitions/user/definitions/groupId"
-            },
-            "roleName": {
-              "$ref": "#/definitions/user/definitions/roleName"
-            }
-          },
-          "strictProperties": true,
-          "type": [
-            "object"
-          ]
+          "$ref": "#/definitions/user/definitions/roles"
         }
-      },
-      "type": [
-        "object"
-      ]
+      }
     },
     "whitelist": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
@@ -1705,6 +2108,9 @@
     },
     "host": {
       "$ref": "#/definitions/host"
+    },
+    "metric": {
+      "$ref": "#/definitions/metric"
     },
     "root": {
       "$ref": "#/definitions/root"
