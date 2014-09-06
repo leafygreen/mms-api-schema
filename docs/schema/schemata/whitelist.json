@@ -1,47 +1,37 @@
 {
   "$schema": "http://json-schema.org/draft-04/hyper-schema",
   "title": "Whitelist",
+  "description": "Working with MMS Whitelists",
+  "type": "object",
   "definitions": {
     "id": {
       "description": "Unique identifier",
       "example": "5196d3628d022db4cbc26d9e",
-      "format": "uuid",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "ipAddress": {
       "description": "A whitelisted IP address.",
       "example": "12.34.56.78",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "created": {
       "description": "The date this IP address was added to the whitelist.",
       "example": "2012-01-01T12:00:00Z",
       "format": "date-time",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "lastUsed": {
       "description": "The date of the most recent request that originated from this IP address. Note that this field is only updated when a resource that is protected by the whitelist is accessed.",
       "example": "2012-01-01T12:00:00Z",
       "format": "date-time",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "count": {
       "description": "The total number of requests that originated from this IP address. Note that this field is only updated when a resource that is protected by the whitelist is accessed.",
-      "example": "1",
-      "type": [
-        "integer"
-      ]
+      "example": 1,
+      "type": "integer"
     }
   },
-  "description": "Working with MMS Whitelists",
   "links": [
     {
       "description": "Create a new whitelist.",
@@ -49,11 +39,10 @@
       "method": "POST",
       "rel": "create",
       "schema": {
-        "properties": {
-        },
-        "type": [
-          "object"
-        ]
+        "$ref": "/schemata/whitelist"
+      },
+      "targetSchema": {
+        "$ref": "/schemata/whitelist"
       },
       "title": "Create"
     },
@@ -69,6 +58,9 @@
       "href": "/users/{(%2Fschemata%2Fuser%23%2Fdefinitions%2Fid)}/whitelist/{(%2Fschemata%2Fwhitelist%23%2Fdefinitions%2Fid)}",
       "method": "GET",
       "rel": "self",
+      "targetSchema": {
+        "$ref": "/schemata/whitelist"
+      },
       "title": "Info"
     },
     {
@@ -76,6 +68,21 @@
       "href": "/users/{(%2Fschemata%2Fuser%23%2Fdefinitions%2Fid)}/whitelist",
       "method": "GET",
       "rel": "instances",
+      "targetSchema": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "example": 1,
+            "type": "integer"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "/schemata/whitelist"
+            }
+          }
+        }
+      },
       "title": "List"
     }
   ],
@@ -93,8 +100,5 @@
       "$ref": "/schemata/whitelist#/definitions/count"
     }
   },
-  "type": [
-    "object"
-  ],
   "id": "schemata/whitelist"
 }

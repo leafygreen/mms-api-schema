@@ -735,8 +735,14 @@ Working with MMS Backup Configurations
     <th>Example</th>
   </tr>
   <tr>
+    <td><strong>authMechanismName</strong></td>
+    <td><em>string</em></td>
+    <td>The name of the authentication mechanism to use when connecting to the sync cource database. Only present when using authentication.<br/><b>one of:</b><code>"MONGODB_CR"</code> or <code>"GSSAPI"</code></td>
+    <td><code>"MONGODB_CR"</code></td>
+  </tr>
+  <tr>
     <td><strong>clusterId</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>ID of the cluster that this backup configuration is for.</td>
     <td><code>"5196e5b0e4b0fca9cc88334a"</code></td>
   </tr>
@@ -748,7 +754,7 @@ Working with MMS Backup Configurations
   </tr>
   <tr>
     <td><strong>groupId</strong></td>
-    <td><em>uuid</em></td>
+    <td><em>string</em></td>
     <td>ID of the group that owns this host.</td>
     <td><code>"5196d3628d022db4cbc26d9e"</code></td>
   </tr>
@@ -767,7 +773,7 @@ Working with MMS Backup Configurations
   <tr>
     <td><strong>statusName</strong></td>
     <td><em>string</em></td>
-    <td>The current (or desired) status of the backup configuration. Possible values are: INACTIVE PROVISIONING STARTED STOPPED TERMINATING</td>
+    <td>The current (or desired) status of the backup configuration.<br/><b>one of:</b><code>"INACTIVE"</code> or <code>"PROVISIONING"</code> or <code>"STARTED"</code> or <code>"STOPPED"</code> or <code>"TERMINATING"</code></td>
     <td><code>"STARTED"</code></td>
   </tr>
   <tr>
@@ -807,6 +813,7 @@ HTTP/1.1 200 OK
   "clusterId": "5196e5b0e4b0fca9cc88334a",
   "groupId": "5196d3628d022db4cbc26d9e",
   "statusName": "STARTED",
+  "authMechanismName": "MONGODB_CR",
   "username": "bob@gmail.com",
   "password": "12!@hello",
   "sslEnabled": "12!@hello",
@@ -834,18 +841,22 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/backup
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "clusterId": "5196e5b0e4b0fca9cc88334a",
-    "groupId": "5196d3628d022db4cbc26d9e",
-    "statusName": "STARTED",
-    "username": "bob@gmail.com",
-    "password": "12!@hello",
-    "sslEnabled": "12!@hello",
-    "syncSource": "12!@hello",
-    "excludedNamespaces": "12!@hello"
-  }
-]
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "clusterId": "5196e5b0e4b0fca9cc88334a",
+      "groupId": "5196d3628d022db4cbc26d9e",
+      "statusName": "STARTED",
+      "authMechanismName": "MONGODB_CR",
+      "username": "bob@gmail.com",
+      "password": "12!@hello",
+      "sslEnabled": "12!@hello",
+      "syncSource": "12!@hello",
+      "excludedNamespaces": "12!@hello"
+    }
+  ]
+}
 ```
 
 ### Backup Configurations Update
@@ -859,6 +870,8 @@ PATCH /groups/{group_id}/backupConfigs/{backupConfig_clusterId}
 #### Curl Example
 ```term
 $ curl -n -X PATCH https://mms.mongodb.com/api/public/v1.0/groups/$GROUP_ID/backupConfigs/$BACKUPCONFIG_CLUSTERID
+-H "Content-Type: application/json" \
+-d '{"clusterId":"5196e5b0e4b0fca9cc88334a","groupId":"5196d3628d022db4cbc26d9e","statusName":"STARTED","authMechanismName":"MONGODB_CR","username":"bob@gmail.com","password":"12!@hello","sslEnabled":"12!@hello","syncSource":"12!@hello","excludedNamespaces":"12!@hello"}'
 ```
 
 
@@ -871,6 +884,7 @@ HTTP/1.1 200 OK
   "clusterId": "5196e5b0e4b0fca9cc88334a",
   "groupId": "5196d3628d022db4cbc26d9e",
   "statusName": "STARTED",
+  "authMechanismName": "MONGODB_CR",
   "username": "bob@gmail.com",
   "password": "12!@hello",
   "sslEnabled": "12!@hello",
@@ -2238,7 +2252,7 @@ Working with MMS Whitelists
     <td><strong>count</strong></td>
     <td><em>integer</em></td>
     <td>The total number of requests that originated from this IP address. Note that this field is only updated when a resource that is protected by the whitelist is accessed.</td>
-    <td><code>"1"</code></td>
+    <td><code>1</code></td>
   </tr>
   <tr>
     <td><strong>created</strong></td>
@@ -2271,6 +2285,8 @@ POST /users/{user_id}/whitelist
 #### Curl Example
 ```term
 $ curl -n -X POST https://mms.mongodb.com/api/public/v1.0/users/$USER_ID/whitelist
+-H "Content-Type: application/json" \
+-d '{"ipAddress":"12.34.56.78","created":"2012-01-01T12:00:00Z","lastUsed":"2012-01-01T12:00:00Z","count":1}'
 ```
 
 
@@ -2283,7 +2299,7 @@ HTTP/1.1 201 Created
   "ipAddress": "12.34.56.78",
   "created": "2012-01-01T12:00:00Z",
   "lastUsed": "2012-01-01T12:00:00Z",
-  "count": "1"
+  "count": 1
 }
 ```
 
@@ -2310,7 +2326,7 @@ HTTP/1.1 200 OK
   "ipAddress": "12.34.56.78",
   "created": "2012-01-01T12:00:00Z",
   "lastUsed": "2012-01-01T12:00:00Z",
-  "count": "1"
+  "count": 1
 }
 ```
 
@@ -2337,7 +2353,7 @@ HTTP/1.1 200 OK
   "ipAddress": "12.34.56.78",
   "created": "2012-01-01T12:00:00Z",
   "lastUsed": "2012-01-01T12:00:00Z",
-  "count": "1"
+  "count": 1
 }
 ```
 
@@ -2360,14 +2376,17 @@ $ curl -n -X GET https://mms.mongodb.com/api/public/v1.0/users/$USER_ID/whitelis
 HTTP/1.1 200 OK
 ```
 ```json
-[
-  {
-    "ipAddress": "12.34.56.78",
-    "created": "2012-01-01T12:00:00Z",
-    "lastUsed": "2012-01-01T12:00:00Z",
-    "count": "1"
-  }
-]
+{
+  "totalCount": 1,
+  "results": [
+    {
+      "ipAddress": "12.34.56.78",
+      "created": "2012-01-01T12:00:00Z",
+      "lastUsed": "2012-01-01T12:00:00Z",
+      "count": 1
+    }
+  ]
+}
 ```
 
 

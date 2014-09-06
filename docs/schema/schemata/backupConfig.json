@@ -1,72 +1,68 @@
 {
   "$schema": "http://json-schema.org/draft-04/hyper-schema",
   "title": "Backup Configurations",
+  "description": "Working with MMS Backup Configurations",
+  "type": "object",
   "definitions": {
     "clusterId": {
       "description": "ID of the cluster that this backup configuration is for.",
       "example": "5196e5b0e4b0fca9cc88334a",
-      "format": "uuid",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "groupId": {
       "description": "ID of the group that owns this host.",
       "example": "5196d3628d022db4cbc26d9e",
-      "format": "uuid",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "statusName": {
-      "description": "The current (or desired) status of the backup configuration. Possible values are: INACTIVE PROVISIONING STARTED STOPPED TERMINATING",
+      "description": "The current (or desired) status of the backup configuration.",
       "example": "STARTED",
-      "type": [
-        "string"
-      ]
+      "type": "string",
+      "enum": ["INACTIVE", "PROVISIONING", "STARTED", "STOPPED", "TERMINATING"]
+    },
+    "authMechanismName": {
+      "description": "The name of the authentication mechanism to use when connecting to the sync cource database. Only present when using authentication.",
+      "example": "MONGODB_CR",
+      "type": "string",
+      "enum": ["MONGODB_CR", "GSSAPI"]
     },
     "username": {
       "description": "The username to use to connect to the sync source database. Only present when auth is required to connect to the mongod being backed up.",
       "example": "bob@gmail.com",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "password": {
       "description": "The username to use to connect to the sync source database. Only present when auth is required to connect to the mongod being backed up.",
       "example": "12!@hello",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "sslEnabled": {
       "description": "Is SSL enabled for the sync source database?",
-      "example": "false",
-      "type": [
-        "boolean"
-      ]
+      "example": false,
+      "type": "boolean"
     },
     "syncSource": {
       "description": "The database to use to get data to be backed up. Possible values are either a specific hostname or one of: PRIMARY SECONDARY. This field is only used when updating a backup configuration. It is not returned by a GET request.",
       "example": "SECONDARY",
-      "type": [
-        "string"
-      ]
+      "type": "string"
     },
     "excludedNamespaces": {
       "description": "A list of database names and/or collection names that should not be backed up. A string without a dot is assumed to be a database name; a string with a dot is assumed to mean dbName.collectionName.",
-      "type": [
-        "array"
-      ]
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
-  "description": "Working with MMS Backup Configurations",
   "links": [
     {
       "description": "Info for existing backupConfig.",
       "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/backupConfigs/{(%2Fschemata%2FbackupConfig%23%2Fdefinitions%2FclusterId)}",
       "method": "GET",
       "rel": "self",
+      "targetSchema": {
+        "$ref": "/schemata/backupConfig"
+      },
       "title": "Info"
     },
     {
@@ -74,6 +70,21 @@
       "href": "/groups/{(%2Fschemata%2Fgroup%23%2Fdefinitions%2Fid)}/backupConfigs",
       "method": "GET",
       "rel": "instances",
+      "targetSchema": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "example": 1,
+            "type": "integer"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "/schemata/backupConfig"
+            }
+          }
+        }
+      },
       "title": "List"
     },
     {
@@ -82,11 +93,10 @@
       "method": "PATCH",
       "rel": "update",
       "schema": {
-        "properties": {
-        },
-        "type": [
-          "object"
-        ]
+        "$ref": "/schemata/backupConfig"
+      },
+      "targetSchema": {
+        "$ref": "/schemata/backupConfig"
       },
       "title": "Update"
     }
@@ -100,6 +110,9 @@
     },
     "statusName": {
       "$ref": "/schemata/backupConfig#/definitions/statusName"
+    },
+    "authMechanismName": {
+      "$ref": "/schemata/backupConfig#/definitions/authMechanismName"
     },
     "username": {
       "$ref": "/schemata/backupConfig#/definitions/username"
@@ -117,8 +130,5 @@
       "$ref": "/schemata/backupConfig#/definitions/password"
     }
   },
-  "type": [
-    "object"
-  ],
   "id": "schemata/backupConfig"
 }
